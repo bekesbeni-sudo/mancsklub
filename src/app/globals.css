@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/components.css";
+@import "../styles/app.css";
+
+@theme inline {
+  --color-cream: #fbf7f2;
+  --color-sand: #f3ebe2;
+  --color-line: #e6d9cb;
+  --color-ink: #2e1f16;
+  --color-muted: #6b5747;
+  --color-accent: #7d572e;
+  --color-accent-dark: #2e1f16;
+  --color-error: #a33b26;
+}
+
+:root {
+  --font-display: var(--nf-display), system-ui, sans-serif;
+  --font-serif: var(--nf-serif), Georgia, serif;
+  --font-body: var(--nf-body), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.font-title {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100;
+}
