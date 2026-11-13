@@ -1,6 +1,7 @@
 import "server-only";
 import { site } from "@/config/site";
 import { t } from "@/messages";
+import { confirmationEmailHtml } from "./email-template";
 
 async function send(to: string, subject: string, text: string, html?: string): Promise<void> {
   try {
@@ -15,9 +16,6 @@ async function send(to: string, subject: string, text: string, html?: string): P
   }
 }
 
-const escapeHtml = (value: string) =>
-  value.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
-
 // A failed email must never lose a signup, so this logs instead of throwing.
 export async function sendWaitlistConfirmation(to: string, url: string): Promise<void> {
   if (!process.env.RESEND_API_KEY) {
@@ -27,14 +25,7 @@ export async function sendWaitlistConfirmation(to: string, url: string): Promise
     return;
   }
   const e = t.email;
-  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#1f1b16">
-<p>${escapeHtml(e.hello)}</p>
-<p>${escapeHtml(e.lead)}</p>
-<p style="margin:28px 0"><a href="${escapeHtml(url)}" style="background:#1f1b16;color:#ffffff;text-decoration:none;padding:14px 26px;border-radius:999px;font-weight:bold;display:inline-block">${escapeHtml(e.button)}</a></p>
-<p style="font-size:14px;color:#6b6259">${escapeHtml(e.ignore)}</p>
-<p>${escapeHtml(e.bye)}<br>${escapeHtml(site.name)}</p>
-</div>`;
-  await send(to, e.subject, e.body(url), html);
+  await send(to, e.subject, e.body(url), confirmationEmailHtml(url));
 }
 
 export async function sendLoginLink(to: string, url: string): Promise<void> {
