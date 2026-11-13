@@ -45,6 +45,7 @@
 - **Vercel:** the project goes into Benjamin's existing "Bekes" Pro team, next to Sleeve, to avoid a second Pro plan. Sleeve's project is not touched. This replaces "new accounts" for Vercel; Supabase stays in its own organisation.
 - **Sleeve paused (2026-11-13):** at Benjamin's request the `sleeveclub` Vercel project is paused (site returns 503, nothing deleted, can be resumed in the Vercel dashboard). Its Supabase project was already inactive.
 - **Vercel settings (2026-11-13):** framework preset Next.js; Vercel Authentication protects preview deployments only, so production is public. Live at mancsklub.vercel.app until the domain is connected. Forms stay closed in production until `site.controller` is filled.
+- **Controller details (2026-11-13):** the company is under registration, with the articles signed and filed (Benjamin's confirmation). `site.controller` is "Mancsklub Kft. bejegyzés alatt", 1124 Budapest, Fürj utca 2., with the registration number shown as "bejegyzés alatt". This opens the forms in production. To do: replace with the real number when issued, and have the lawyer check the privacy text.
 - **Data controller:** Mancsklub Kft. Its address and registration number go in `site.controller` before the forms open.
 
 ## Still open
