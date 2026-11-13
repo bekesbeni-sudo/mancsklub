@@ -6,6 +6,7 @@ export const site = {
   domain: "mancsklub.hu",
   contactEmail: "info@mancsklub.hu",
   instagram: "https://www.instagram.com/mancsklub/",
+  facebook: "https://www.facebook.com/profile.php?id=61596380316656",
   // Who collects the data. Must be filled in before the forms can open in production.
   controller: {
     name: "Mancsklub Kft.",
