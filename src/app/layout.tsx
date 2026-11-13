@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Fraunces, Inter_Tight, Instrument_Sans, Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { t } from "@/messages";
 import "./globals.css";
 
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="hu" data-scroll-behavior="smooth" className={`${display.variable} ${serif.variable} ${body.variable} ${hand.variable} ${mont.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
