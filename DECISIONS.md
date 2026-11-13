@@ -67,3 +67,10 @@
 - Brief section 7: home clinic only or any partner (the code currently allows any active partner), waiting period, age limits, pet death or rehoming, legal entity. Also what an early cancellation costs under the 12-month commitment.
 - Invoicing provider: ask the accountant.
 - Survey hot leads: import only those who consented to contact.
+
+## 2026-11-13: Google Forms survey addresses on the waitlist
+
+- The 197 distinct addresses left in the earlier market research survey ("Szeretnél értesülni az indulásról?") are imported into the waitlist with `source = 'form'`.
+- No email is sent at import: the owner wants to write to them separately first, so they understand where the message comes from. They are not marked confirmed and have no marketing consent.
+- Species, pet count and the survey timestamp are carried over. Privacy version is `google-form-2026-10`. Existing site signups with the same address are left as they are.
+- The import file holds personal data, so it is not in the repository.

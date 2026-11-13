@@ -20,11 +20,12 @@ export type SignupRow = {
   package_name: string | null;
   converted_membership_id: string | null;
   confirmed_at: Date | null;
+  source: "site" | "form";
 };
 
 const signupSelect = `
   select w.id, w.created_at, w.email, w.species, w.pet_name, w.package_code,
-         k.name_hu as package_name, w.converted_membership_id, w.confirmed_at
+         k.name_hu as package_name, w.converted_membership_id, w.confirmed_at, w.source
   from waitlist_signups w
   left join packages k on k.code = w.package_code`;
 
@@ -32,7 +33,7 @@ export function listSignups(db: Db, query: string): Promise<SignupRow[]> {
   return db.query<SignupRow>(
     `${signupSelect}
      where w.email ilike $1 or coalesce(w.pet_name, '') ilike $1
-     order by (w.converted_membership_id is null) desc, w.created_at desc limit 200`,
+     order by (w.converted_membership_id is null) desc, w.created_at desc limit 1000`,
     [pattern(query)],
   );
 }

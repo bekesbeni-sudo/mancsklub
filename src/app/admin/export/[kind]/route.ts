@@ -32,7 +32,7 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/admin/export
   if (kind === "waitlist") {
     const rows = await listWaitlist(db);
     csv = toCsv(
-      ["date", "email", "pet_name", "pets", "species", "location", "current_clinic", "package", "marketing_consent", "confirmed"],
+      ["date", "email", "pet_name", "pets", "species", "location", "current_clinic", "package", "marketing_consent", "confirmed", "source"],
       rows.map((r) => [
         formatDate(new Date(r.created_at)),
         r.email,
@@ -44,6 +44,7 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/admin/export
         r.package_code,
         r.marketing_consent ? "yes" : "no",
         r.confirmed_at ? formatDate(new Date(r.confirmed_at)) : "",
+        r.source,
       ]),
     );
   } else if (kind === "clinics") {

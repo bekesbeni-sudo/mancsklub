@@ -583,7 +583,7 @@ export const hu = {
       },
       waitlist: {
         title: "Várólista",
-        sub: "A landing oldalon feliratkozottak. Innen lehet belőlük tag.",
+        sub: "A landing oldalon feliratkozottak és a korábbi kérdőívből átvett címek. Innen lehet belőlük tag.",
         search: "Keresés",
         date: "Dátum",
         email: "E-mail-cím",
@@ -599,6 +599,8 @@ export const hu = {
         convert: "Taggá alakítás",
         open: "Tag megnyitása",
         both: "Mindkettő",
+        source: "Forrás",
+        sources: { site: "Oldal", form: "Kérdőív" },
         download: "CSV letöltése",
       },
       owners: {

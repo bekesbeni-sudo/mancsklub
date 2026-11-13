@@ -148,12 +148,13 @@ export type WaitlistRow = {
   package_code: string | null;
   marketing_consent: boolean;
   confirmed_at: Date | null;
+  source: "site" | "form";
 };
 
 export function listWaitlist(db: Db): Promise<WaitlistRow[]> {
   return db.query<WaitlistRow>(
     `select created_at, email, pet_name, pet_count, species, location, current_clinic,
-            package_code, marketing_consent, confirmed_at
+            package_code, marketing_consent, confirmed_at, source
      from waitlist_signups order by created_at`,
   );
 }
