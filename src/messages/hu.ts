@@ -167,7 +167,7 @@ export const hu = {
       },
       team: {
         bekesBenjamin: "Békés Benjámin",
-        coFounderEsCegvezeto: "Co-founder és Cégvezető",
+        coFounderEsCegvezeto: "Társalapító",
         bihariDavid: "Bihari Dávid",
         ilkovitsAbelEsNozi: "Ilkovits Ábel és Nózi",
         ilkovitsAbel: "Ilkovits Ábel",
