@@ -454,7 +454,7 @@ export const hu = {
     },
     admin: {
       area: "Admin",
-      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás" },
+      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás", waitingCount: (n: number) => `${n} fő vár a várólistán` },
       suggested: {
         title: "Javasolt rendelők",
         sub: "A rendelők, amelyeket a gazdik a landing oldalon beírtak. Innen érdemes toborozni.",

@@ -178,6 +178,14 @@ export function requestedClinics(db: Db) {
   );
 }
 
+// People on the waitlist who have not become members yet: the number on the admin menu.
+export async function waitingCount(db: Db): Promise<number> {
+  const [row] = await db.query<{ n: number }>(
+    "select count(*)::int as n from waitlist_signups where converted_membership_id is null",
+  );
+  return row?.n ?? 0;
+}
+
 export type SuggestionRow = {
   created_at: Date;
   clinic: string;

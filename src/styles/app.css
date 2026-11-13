@@ -18,6 +18,9 @@
 .mk-nav a { display: block; padding: 9px 12px; border-radius: var(--radius-sm); color: var(--ink-muted); font-size: 15px; font-weight: 600; text-decoration: none; }
 .mk-nav a:hover { background: var(--sand-50); color: var(--ink); }
 .mk-nav a.is-on { background: var(--ink); color: var(--surface); }
+.mk-nav a { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mk-badge { flex: none; min-width: 22px; height: 22px; padding: 0 7px; border-radius: var(--radius-pill); background: var(--sage-soft); color: var(--sage-deep); font-size: 12px; font-weight: 700; line-height: 22px; text-align: center; font-variant-numeric: tabular-nums; }
+.mk-nav a.is-on .mk-badge { background: var(--caramel); color: var(--surface); }
 .mk-side__foot { margin-top: auto; display: grid; gap: var(--space-2); justify-items: start; }
 .mk-live-link { gap: 6px; }
 .mk-link { padding: 9px 12px; border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }

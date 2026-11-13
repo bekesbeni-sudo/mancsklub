@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { Shell } from "@/components/shell";
 import { t } from "@/messages";
+import { WaitlistBadge } from "./waitlist-badge";
 
 // Private pages read the login on every request, so they cannot be instant.
 export const instant = false;
@@ -12,7 +14,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       home="/admin"
       links={[
         { href: "/admin", label: n.overview },
-        { href: "/admin/varolista", label: n.waitlist },
+        {
+          href: "/admin/varolista",
+          label: n.waitlist,
+          badge: (
+            <Suspense fallback={null}>
+              <WaitlistBadge />
+            </Suspense>
+          ),
+        },
         { href: "/admin/gazdik", label: n.owners },
         { href: "/admin/tagok", label: n.members },
         { href: "/admin/rendelok", label: n.clinics },

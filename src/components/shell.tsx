@@ -3,7 +3,7 @@ import Link from "next/link";
 import { logout } from "@/app/belepes/actions";
 import { site } from "@/config/site";
 import { t } from "@/messages";
-import { NavLinks } from "./nav-links";
+import { type NavLink, NavLinks } from "./nav-links";
 
 // The same logo image as the landing page header, so the brand lives in one file (site.logo).
 export function Wordmark({ href = "/" }: { href?: string }) {
@@ -23,7 +23,7 @@ export function Shell({
 }: {
   area: string;
   home: string;
-  links: { href: string; label: string }[];
+  links: NavLink[];
   logoutAction?: () => Promise<void>;
   children: React.ReactNode;
 }) {
@@ -51,6 +51,16 @@ export function Shell({
       </aside>
       <main className="mk-main">{children}</main>
     </div>
+  );
+}
+
+// A small count on a menu item. Empty counts show nothing.
+export function NavBadge({ count, label }: { count: number; label: string }) {
+  if (count <= 0) return null;
+  return (
+    <span className="mk-badge" aria-label={label}>
+      {count > 999 ? "999+" : count}
+    </span>
   );
 }
 
