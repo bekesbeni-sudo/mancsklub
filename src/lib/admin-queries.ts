@@ -1,4 +1,5 @@
 import type { Db } from "./queries";
+import type { PartnerType } from "./validation";
 
 const pattern = (query: string) => `%${query.trim().replace(/[\\%_]/g, "\\$&")}%`;
 
@@ -58,11 +59,12 @@ export type InterestRow = {
   location: string;
   message: string | null;
   clinic_id: string | null;
+  partner_type: PartnerType;
 };
 
 export function listInterest(db: Db): Promise<InterestRow[]> {
   return db.query<InterestRow>(
-    `select id, created_at, clinic_name, contact_name, email, phone, location, message, clinic_id
+    `select id, created_at, clinic_name, contact_name, email, phone, location, message, clinic_id, partner_type
      from clinic_interest order by (clinic_id is null) desc, created_at desc limit 200`,
   );
 }
@@ -71,7 +73,7 @@ export function listInterest(db: Db): Promise<InterestRow[]> {
 export function clinicFromInterest(db: Db, interestId: string, actor: string): Promise<string | null> {
   return db.transaction(async (tx) => {
     const [row] = await tx.query<InterestRow>("select * from clinic_interest where id::text = $1 for update", [interestId]);
-    if (!row) return null;
+    if (!row || row.partner_type !== "clinic") return null;
     if (row.clinic_id) return row.clinic_id;
     const [clinic] = await tx.query<{ id: string }>(
       `insert into clinics (name, contract_status, town, contact_name, contact_email, contact_phone, notes)

@@ -80,6 +80,14 @@ describe("clinic enquiries", () => {
     expect((await overview(db)).interest).toBe(0);
   });
 
+  it("does not turn a brand partner into a clinic", async () => {
+    await enquiry();
+    await db.query("update clinic_interest set partner_type = 'food'");
+    const [row] = await listInterest(db);
+    expect(await clinicFromInterest(db, row.id, actor)).toBeNull();
+    expect(await db.query("select id from clinics")).toHaveLength(0);
+  });
+
   it("returns nothing for an unknown enquiry", async () => {
     expect(await clinicFromInterest(db, "nem-azonosito", actor)).toBeNull();
   });

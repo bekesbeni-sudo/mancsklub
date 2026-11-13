@@ -181,6 +181,15 @@ describe("database", () => {
     const rows = await listClinicInterest(db);
     expect(rows).toHaveLength(1);
     expect(rows[0].phone).toBeNull();
+    expect(rows[0].partner_type).toBe("clinic");
+  });
+
+  it("stores the partner type and refuses an unknown one", async () => {
+    const base = { clinicName: "Példa Táp Kft.", contactName: "Példa Anna", email: "tap@example.hu", phone: "", location: "Győr", message: "", privacy: "on" };
+    await addClinicInterest(db, clinicSchema.parse({ ...base, partnerType: "food" }), "v1");
+    expect((await listClinicInterest(db))[0].partner_type).toBe("food");
+    expect(clinicSchema.safeParse({ ...base, partnerType: "kamu" }).success).toBe(false);
+    await expect(db.query("update clinic_interest set partner_type = 'kamu'")).rejects.toThrow();
   });
 
   it("keeps private tables closed to the public API roles", async () => {

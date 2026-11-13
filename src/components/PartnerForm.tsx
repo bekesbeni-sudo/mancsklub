@@ -2,14 +2,15 @@
 
 import { useActionState } from "react";
 import { submitClinicInterest, type FormState } from "@/app/actions";
+import { partnerTypes } from "@/lib/validation";
 import { t } from "@/messages";
 import { Field, FormNotice, Honeypot, inputClass, PrivacyCheckbox, SubmitButton } from "./fields";
 
 const initial: FormState = { status: "idle" };
 
-export function ClinicForm() {
+export function PartnerForm() {
   const [state, action, pending] = useActionState(submitClinicInterest, initial);
-  const c = t.clinics;
+  const c = t.partners;
   const v = state.values ?? {};
   const e = state.errors ?? {};
 
@@ -19,6 +20,17 @@ export function ClinicForm() {
     <form action={action} noValidate className="relative space-y-5">
       {state.message && <FormNotice tone="error">{state.message}</FormNotice>}
       <Honeypot />
+      <fieldset>
+        <legend className="mb-2 block text-sm font-semibold">{c.type}</legend>
+        <div className="flex flex-wrap gap-2">
+          {partnerTypes.map((type, index) => (
+            <label key={type} className="partner-type">
+              <input type="radio" name="partnerType" value={type} defaultChecked={v.partnerType ? v.partnerType === type : index === 0} />
+              <span>{c.types[type]}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <Field label={c.clinicName} name="clinicName" error={e.clinicName}>
         <input id="clinicName" name="clinicName" type="text" required defaultValue={v.clinicName} className={inputClass} />
       </Field>

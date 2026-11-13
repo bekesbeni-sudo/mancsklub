@@ -30,7 +30,11 @@ export const clinicSuggestionSchema = z.object({
   token: z.string().max(400).nullable(),
 });
 
+export const partnerTypes = ["clinic", "food", "grooming", "hotel", "shop", "brand", "other"] as const;
+export type PartnerType = (typeof partnerTypes)[number];
+
 export const clinicSchema = z.object({
+  partnerType: z.enum(partnerTypes, { error: e.required }).default("clinic"),
   clinicName: required(160),
   contactName: required(120),
   email,

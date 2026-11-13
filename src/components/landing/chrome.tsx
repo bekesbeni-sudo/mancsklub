@@ -42,6 +42,7 @@ export function SiteFooter() {
           <Link href="/#rolunk" className="nl">{n.about}</Link>
           <Link href="/#gyik" className="nl">{n.faq}</Link>
           <a href={`mailto:${site.contactEmail}`} className="nl">{site.contactEmail}</a>
+          <Link href="/partnereknek" className="nl">{t.footer.partners}</Link>
           <Link href="/adatvedelem" className="nl">{n.privacy}</Link>
           <Link href="/belepes" className="nl">{n.staffLogin}</Link>
         </div>

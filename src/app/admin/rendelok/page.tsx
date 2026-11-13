@@ -53,16 +53,20 @@ export default async function ClinicsPage() {
           <div className="mk-tablewrap">
             <table className="mk-table">
               <thead>
-                <tr><th>{c.name}</th><th>{c.interestPlace}</th><th>{c.interestContact}</th><th></th></tr>
+                <tr><th>{c.interestType}</th><th>{c.name}</th><th>{c.interestPlace}</th><th>{c.interestContact}</th><th></th></tr>
               </thead>
               <tbody>
                 {interest.map((row) => (
                   <tr key={row.id}>
+                    <td>{t.partners.types[row.partner_type]}</td>
                     <td>{row.clinic_name}</td>
                     <td>{row.location}</td>
-                    <td>{[row.contact_name, row.email, row.phone].filter(Boolean).join(", ")}</td>
                     <td>
-                      {row.clinic_id ? (
+                      {[row.contact_name, row.email, row.phone].filter(Boolean).join(", ")}
+                      {row.message && <div className="mk-muted">{row.message}</div>}
+                    </td>
+                    <td>
+                      {row.partner_type !== "clinic" ? null : row.clinic_id ? (
                         <Link href={`/admin/rendelok/${row.clinic_id}`}>{c.interestOpen}</Link>
                       ) : (
                         <form action={addClinicFromInterest.bind(null, row.id)}>

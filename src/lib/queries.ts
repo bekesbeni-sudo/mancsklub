@@ -122,8 +122,8 @@ export async function addClinicInterest(
 ): Promise<void> {
   await db.query(
     `insert into clinic_interest
-       (clinic_name, contact_name, email, phone, location, message, privacy_version)
-     values ($1, $2, $3, $4, $5, $6, $7)`,
+       (clinic_name, contact_name, email, phone, location, message, privacy_version, partner_type)
+     values ($1, $2, $3, $4, $5, $6, $7, $8)`,
     [
       input.clinicName,
       input.contactName,
@@ -132,6 +132,7 @@ export async function addClinicInterest(
       input.location,
       input.message,
       privacyVersion,
+      input.partnerType,
     ],
   );
 }
@@ -159,6 +160,7 @@ export function listWaitlist(db: Db): Promise<WaitlistRow[]> {
 
 export type ClinicRow = {
   created_at: Date;
+  partner_type: string;
   clinic_name: string;
   contact_name: string;
   email: string;
@@ -169,7 +171,7 @@ export type ClinicRow = {
 
 export function listClinicInterest(db: Db): Promise<ClinicRow[]> {
   return db.query<ClinicRow>(
-    `select created_at, clinic_name, contact_name, email, phone, location, message
+    `select created_at, partner_type, clinic_name, contact_name, email, phone, location, message
      from clinic_interest order by created_at`,
   );
 }

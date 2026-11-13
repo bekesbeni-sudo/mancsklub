@@ -49,9 +49,10 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/admin/export
   } else if (kind === "clinics") {
     const rows = await listClinicInterest(db);
     csv = toCsv(
-      ["date", "clinic", "contact", "email", "phone", "location", "message"],
+      ["date", "type", "name", "contact", "email", "phone", "location", "message"],
       rows.map((r) => [
         formatDate(new Date(r.created_at)),
+        r.partner_type,
         r.clinic_name,
         r.contact_name,
         r.email,

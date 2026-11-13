@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   serverExternalPackages: ["@electric-sql/pglite"],
   partialPrefetching: true,
+  // The clinic page became the partner page.
+  redirects: async () => [{ source: "/rendeloknek", destination: "/partnereknek", permanent: true }],
   turbopack: {
     rules: {
       "*.css": {
