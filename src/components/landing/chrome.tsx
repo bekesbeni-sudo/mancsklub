@@ -20,6 +20,7 @@ export function SiteHeader() {
           <Link href="/#arazas" className="nl">{n.price}</Link>
           <Link href="/#rolunk" className="nl">{n.about}</Link>
           <Link href="/#gyik" className="nl">{n.faq}</Link>
+          <Link href="/partnereknek" className="nl nl-partner">{t.footer.partners}</Link>
         </div>
         <Link href="/#feliratkozas" className="btn" style={{ minHeight: 44, padding: "0 20px", fontSize: 15, background: "#2E1F16", color: "#FFFFFF" }}>{t.landing.cta}</Link>
       </nav>
@@ -44,7 +45,6 @@ export function SiteFooter() {
           <a href={`mailto:${site.contactEmail}`} className="nl">{site.contactEmail}</a>
           <Link href="/partnereknek" className="nl">{t.footer.partners}</Link>
           <Link href="/adatvedelem" className="nl">{n.privacy}</Link>
-          <Link href="/belepes" className="nl">{n.staffLogin}</Link>
         </div>
         <div className="soc-row">
           <a className="soc" href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label={n.instagram}>

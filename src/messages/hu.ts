@@ -18,7 +18,6 @@ export const hu = {
       about: "Rólunk",
       faq: "GYIK",
       privacy: "Adatkezelés",
-      staffLogin: "Staff login",
       copyright: "© 2026 · Magyarország",
       instagram: `${site.name} az Instagramon`,
       facebook: `${site.name} a Facebookon`,

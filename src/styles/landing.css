@@ -594,4 +594,6 @@
 @media (prefers-reduced-motion:reduce){.pw *,.pw *::before,.pw *::after{animation:none!important;transition:none!important}}
 /* Added: with reduced motion the headline words would stay invisible, because their fade-in never runs. */
 @media (prefers-reduced-motion:reduce){.pw .hx2 .hx-h1 .w{opacity:1;filter:none;transform:none}}
+.pw .nl-partner{color:#A68563;font-weight:700}
+.pw .nl-partner:hover{color:#7D572E}
 }
