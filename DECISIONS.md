@@ -74,3 +74,9 @@
 - No email is sent at import: the owner wants to write to them separately first, so they understand where the message comes from. They are not marked confirmed and have no marketing consent.
 - Species, pet count and the survey timestamp are carried over. Privacy version is `google-form-2026-10`. Existing site signups with the same address are left as they are.
 - The import file holds personal data, so it is not in the repository.
+
+## 2026-11-13: Vercel Web Analytics
+
+- Vercel Web Analytics is on, loaded from the root layout (`src/components/site-analytics.tsx`). It sets no cookies, so the "no tracking cookies" line on the privacy page stays true.
+- Private areas (`/admin`, `/rendelo`, `/belepes`, `/gazdi`, `/elszamolas`) are not counted, and query strings are dropped because some links carry one-time tokens (`src/lib/analytics.ts`).
+- Whether the privacy page should mention the anonymous visit statistics goes to the lawyer with the other privacy questions.
