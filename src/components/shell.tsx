@@ -1,23 +1,15 @@
+/* eslint-disable @next/next/no-img-element -- the logo is a small fixed image, as on the landing page */
 import Link from "next/link";
 import { logout } from "@/app/belepes/actions";
 import { site } from "@/config/site";
 import { t } from "@/messages";
+import { NavLinks } from "./nav-links";
 
+// The same logo image as the landing page header, so the brand lives in one file (site.logo).
 export function Wordmark({ href = "/" }: { href?: string }) {
-  const [first, second] = site.wordmark;
   return (
     <Link href={href} className="mk-wordmark" aria-label={site.name}>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <ellipse cx="6" cy="10" rx="2.3" ry="3" />
-        <ellipse cx="10.5" cy="5.8" rx="2.3" ry="3" />
-        <ellipse cx="15.5" cy="5.8" rx="2.3" ry="3" />
-        <ellipse cx="19.5" cy="10.5" rx="2.2" ry="2.9" />
-        <path d="M12.8 10.5c3 0 5.7 3.5 5.7 6.2 0 2.1-1.6 3.1-3.3 3.1-1.2 0-1.6-.5-2.4-.5s-1.3.5-2.5.5c-1.7 0-3.3-1-3.3-3.1 0-2.7 2.8-6.2 5.8-6.2Z" />
-      </svg>
-      <b>
-        {first}
-        <span>{second}</span>
-      </b>
+      <img src={site.logo} alt={site.name} />
     </Link>
   );
 }
@@ -42,18 +34,20 @@ export function Shell({
           <Wordmark href={home} />
           <p className="mk-side__area">{area}</p>
         </div>
-        <nav className="mk-nav">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <form action={logoutAction}>
-          <button type="submit" className="mk-link">
-            {t.portal.logout}
-          </button>
-        </form>
+        <NavLinks links={links} />
+        <div className="mk-side__foot">
+          <Link href="/" className="mk-btn mk-btn--secondary mk-btn--sm mk-live-link" aria-label={t.portal.liveSiteAria}>
+            {t.portal.liveSite}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
+          </Link>
+          <form action={logoutAction}>
+            <button type="submit" className="mk-link">
+              {t.portal.logout}
+            </button>
+          </form>
+        </div>
       </aside>
       <main className="mk-main">{children}</main>
     </div>

@@ -178,6 +178,42 @@ export function requestedClinics(db: Db) {
   );
 }
 
+export type SuggestionRow = {
+  created_at: Date;
+  clinic: string;
+  source: "box" | "signup";
+  signup_id: string | null;
+  email: string | null;
+};
+
+const suggestionRows = `
+  select s.created_at, s.clinic_name as clinic, 'box' as source, w.id as signup_id, w.email
+  from clinic_suggestions s left join waitlist_signups w on w.id = s.signup_id
+  union all
+  select w.created_at, w.current_clinic, 'signup', w.id, w.email
+  from waitlist_signups w where w.current_clinic is not null`;
+
+const pattern = (query: string) => `%${query.trim().replace(/[\\%_]/g, "\\$&")}%`;
+
+// Every clinic name typed in on the landing page, newest first.
+export function listSuggestions(db: Db, query = "", limit = 500) {
+  return db.query<SuggestionRow>(
+    `select * from (${suggestionRows}) s where clinic ilike $1 order by created_at desc limit ${Number(limit)}`,
+    [pattern(query)],
+  );
+}
+
+// The same names grouped, so "Példa Rendelő" and "példa rendelő " count as one.
+export function rankSuggestions(db: Db, query = "") {
+  return db.query<{ clinic: string; requests: number; last_at: Date }>(
+    `select min(clinic) as clinic, count(*)::int as requests, max(created_at) as last_at
+     from (${suggestionRows}) s where clinic ilike $1
+     group by lower(trim(clinic))
+     order by requests desc, clinic limit 200`,
+    [pattern(query)],
+  );
+}
+
 export type PeriodRow = {
   clinic_id: string;
   clinic_name: string;

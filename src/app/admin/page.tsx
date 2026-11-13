@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { connection } from "next/server";
 import { PageHead } from "@/components/shell";
 import { requireAdmin } from "@/lib/auth";
@@ -36,7 +37,10 @@ export default async function AdminHome() {
       </div>
       <section className="mk-panel">
         <h2 className="mk-h">{o.requested}</h2>
-        <p className="mk-muted">{o.requestedHint}</p>
+        <p className="mk-muted" style={{ marginTop: -8, marginBottom: 16 }}>
+          {o.requestedHint}{" "}
+          <Link href="/admin/javaslatok" className="mk-inline">{o.requestedAll} &rarr;</Link>
+        </p>
         {requested.length === 0 ? (
           <p className="mk-empty">{t.portal.none}</p>
         ) : (

@@ -3,7 +3,7 @@ import { areFormsOpen } from "@/config/site";
 import { toCsv } from "@/lib/csv";
 import { formatDate, formatFt } from "@/lib/format";
 import { openLocalDb } from "@/lib/local-db";
-import { requestedClinics } from "@/lib/portal-queries";
+import { listSuggestions, rankSuggestions, requestedClinics } from "@/lib/portal-queries";
 import {
   addClinicInterest,
   addClinicSuggestion,
@@ -160,6 +160,11 @@ describe("database", () => {
       { clinic: "Példa Rendelő", requests: 2 },
       { clinic: "Másik", requests: 1 },
     ]);
+    const all = await listSuggestions(db);
+    expect(all).toHaveLength(3);
+    expect(all.filter((row) => row.email === "gazdi@example.hu")).toHaveLength(1);
+    expect((await rankSuggestions(db, "példa")).map((row) => [row.clinic, row.requests])).toEqual([["Példa Rendelő", 2]]);
+    expect(await listSuggestions(db, "%")).toHaveLength(0);
   });
 
   it("stores clinic interest", async () => {

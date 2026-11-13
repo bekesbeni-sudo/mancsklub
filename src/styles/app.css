@@ -1,26 +1,35 @@
 /* Admin and clinic portal, built on the MancsKlub tokens. */
-.mk-wordmark { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; }
-.mk-wordmark b { font-family: var(--font-serif); font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: "SOFT" 100; }
-.mk-wordmark b span { color: var(--caramel); }
-.mk-wordmark svg { color: var(--caramel); }
 
-.mk-shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100dvh; background: var(--sand-50); }
+/* tokens.css names the fonts, but next/font loads them under generated names: point at those, so the
+   portals use the same Inter Tight and Instrument Sans as the landing page. */
+:root {
+  --font-display: var(--nf-display), "Inter Tight", system-ui, sans-serif;
+  --font-body: var(--nf-body), "Instrument Sans", system-ui, sans-serif;
+  --font-serif: var(--nf-serif), Fraunces, Georgia, serif;
+}
+
+.mk-wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+.mk-wordmark img { display: block; height: 28px; width: auto; }
+
+.mk-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100dvh; background: var(--sand-50); font-family: var(--font-body); color: var(--ink); }
 .mk-side { display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6) var(--space-4); background: var(--surface); border-right: 1px solid var(--line); position: sticky; top: 0; height: 100dvh; }
-.mk-side__area { margin: 2px 0 0 28px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-subtle); }
+.mk-side__area { margin: 10px 0 0 2px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-subtle); }
 .mk-nav { display: grid; gap: 2px; }
 .mk-nav a { display: block; padding: 9px 12px; border-radius: var(--radius-sm); color: var(--ink-muted); font-size: 15px; font-weight: 600; text-decoration: none; }
 .mk-nav a:hover { background: var(--sand-50); color: var(--ink); }
-.mk-side form { margin-top: auto; }
+.mk-nav a.is-on { background: var(--ink); color: var(--surface); }
+.mk-side__foot { margin-top: auto; display: grid; gap: var(--space-2); justify-items: start; }
+.mk-live-link { gap: 6px; }
 .mk-link { padding: 9px 12px; border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .mk-main { padding: var(--space-8) var(--space-8) var(--space-12); max-width: 1080px; width: 100%; }
 
 .mk-page-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-6); }
-.mk-title { margin: 0; font-family: var(--font-serif); font-size: 34px; line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; font-variation-settings: "SOFT" 100; }
+.mk-title { margin: 0; font-family: var(--font-display); font-size: 36px; line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; color: var(--ink-strong); }
 .mk-sub { margin: 6px 0 0; color: var(--ink-muted); }
-.mk-h { margin: 0 0 var(--space-4); font-family: var(--font-serif); font-size: 21px; font-weight: 600; letter-spacing: -0.01em; font-variation-settings: "SOFT" 100; }
+.mk-h { margin: 0 0 var(--space-4); font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink-strong); }
 .mk-back { display: inline-block; margin-bottom: var(--space-3); color: var(--ink-soft); font-size: 14px; font-weight: 600; text-decoration: none; }
 
-.mk-panel { padding: var(--space-6); margin-bottom: var(--space-6); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.mk-panel { padding: var(--space-6); margin-bottom: var(--space-6); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 1px 2px rgba(46,31,22,0.04); }
 .mk-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); }
 .mk-metric { padding: var(--space-4) 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
 .mk-metric b { display: block; margin-top: 6px; font-family: var(--font-display); font-size: 30px; line-height: 1.1; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
@@ -34,6 +43,7 @@
 .mk-num { text-align: right !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mk-empty { margin: 0; color: var(--ink-soft); }
 .mk-muted { color: var(--ink-soft); font-size: 13.5px; }
+.mk-inline { color: var(--cocoa); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 .mk-form { display: grid; gap: var(--space-4); }
 .mk-form__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--space-4); }
@@ -51,7 +61,7 @@
 .mk-ent__item.is-empty { background: var(--sand-50); color: var(--ink-soft); }
 .mk-ent__left { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; }
 
-.mk-login { display: grid; place-items: center; min-height: 100dvh; padding: var(--space-4); background: var(--sand-50); }
+.mk-login { display: grid; place-items: center; min-height: 100dvh; padding: var(--space-4); background: var(--sand-50); font-family: var(--font-body); color: var(--ink); }
 .mk-login__card { width: 100%; max-width: 400px; padding: var(--space-8); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); }
 .mk-login__pets { display: flex; margin: var(--space-6) 0 var(--space-4); }
 .mk-login__pets img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: 50% 8%; background: var(--sand-100); border: 2px solid var(--surface); }
@@ -63,7 +73,7 @@
   .mk-shell { grid-template-columns: minmax(0, 1fr); }
   .mk-side { position: static; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); padding: var(--space-3) var(--space-4); border-right: 0; border-bottom: 1px solid var(--line); }
   .mk-side__area { display: none; }
-  .mk-side form { margin: 0 0 0 auto; }
+  .mk-side__foot { margin: 0 0 0 auto; display: flex; align-items: center; }
   .mk-nav { display: flex; order: 3; width: 100%; overflow-x: auto; }
   .mk-nav a { white-space: nowrap; padding: 8px 10px; }
   .mk-main { padding: var(--space-6) var(--space-4) var(--space-8); }

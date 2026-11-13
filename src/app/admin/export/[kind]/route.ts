@@ -4,6 +4,7 @@ import { getStaff } from "@/lib/auth";
 import { toCsv } from "@/lib/csv";
 import { getDb } from "@/lib/db";
 import { formatDate } from "@/lib/format";
+import { listSuggestions } from "@/lib/portal-queries";
 import { listClinicInterest, listWaitlist } from "@/lib/queries";
 
 function isAuthorized(request: NextRequest): boolean {
@@ -58,6 +59,12 @@ export async function GET(request: NextRequest, ctx: RouteContext<"/admin/export
         r.location,
         r.message,
       ]),
+    );
+  } else if (kind === "suggestions") {
+    const rows = await listSuggestions(db, "", 100000);
+    csv = toCsv(
+      ["date", "clinic", "source", "signup_email"],
+      rows.map((r) => [formatDate(new Date(r.created_at)), r.clinic, r.source, r.email]),
     );
   } else {
     return new Response("Not found", { status: 404 });
