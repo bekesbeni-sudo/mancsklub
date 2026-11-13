@@ -1356,19 +1356,36 @@ export function LandingView({ v }: { v: LandingModel }) {
               {" "}
               {v.sent && (
                 <>
-                  <div className="wiggle-in" style={{ maxWidth: "560px", padding: "24px 26px", borderRadius: "26px", background: "#E3EBDD", display: "flex", gap: "18px", alignItems: "flex-start" }}>
+                  <div className="wiggle-in join-ok" style={{ maxWidth: "560px", borderRadius: "26px", background: "#E3EBDD", display: "flex", alignItems: "flex-start" }}>
                     <span style={{ flex: "none", width: "50px", height: "50px", borderRadius: "50%", background: "#6F8F6A", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12l5 5L20 7" />
                       </svg>
                     </span>
-                    <div>
+                    <div style={{ minWidth: 0 }}>
                       <p className="h" style={{ margin: "0 0 4px", fontSize: "26px" }}>
                         {v.successTitle}
                       </p>
                       <p style={{ margin: "0 0 10px", color: "#5C4433" }}>
                         {m.join.felirtunkAVarolistaraAmint}{v.successPlan}
                       </p>
+                      <div role="status" style={{ margin: "0 0 14px", padding: "16px 18px", borderRadius: "18px", background: "#FFFFFF", border: "2px solid #6F8F6A", display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6F8F6A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flex: "none", marginTop: "2px" }}>
+                          <rect x="3" y="5" width="18" height="14" rx="2" />
+                          <path d="M3 7l9 6 9-6" />
+                        </svg>
+                        <div>
+                          <p style={{ margin: "0 0 6px", fontSize: "18px", fontWeight: "800", lineHeight: "1.3", color: "#2E1F16" }}>
+                            {v.confirmTitle}
+                          </p>
+                          <p style={{ margin: "0 0 4px", fontSize: "16px", color: "#2E1F16", overflowWrap: "anywhere" }}>
+                            {v.confirmText}
+                          </p>
+                          <p style={{ margin: "0", fontSize: "14px", color: "#5C4433" }}>
+                            {v.confirmSpam}
+                          </p>
+                        </div>
+                      </div>
                       <p style={{ margin: "0 0 10px", fontSize: "14.5px", fontWeight: "700", color: "#2E1F16" }}>
                         {m.join.addigIsKovesdNozi}
                       </p>

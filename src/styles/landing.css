@@ -596,4 +596,7 @@
 @media (prefers-reduced-motion:reduce){.pw .hx2 .hx-h1 .w{opacity:1;filter:none;transform:none}}
 .pw .nl-partner{color:#A68563;font-weight:700}
 .pw .nl-partner:hover{color:#7D572E}
+/* Signup success box: on phones the tick goes above the text, so the confirm note gets the full width. */
+.pw .join-ok{padding:24px 26px;gap:18px}
+@media (max-width:560px){.pw .join-ok{flex-direction:column;padding:20px 18px;gap:12px}}
 }

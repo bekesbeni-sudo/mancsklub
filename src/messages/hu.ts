@@ -283,7 +283,10 @@ export const hu = {
     step: (n: number) => `${n}. lépés`,
     success: {
       title: (name: string) => (name ? `${name} már várja az indulást!` : "Rajta vagy a várólistán!"),
-      confirm: " Küldtünk egy e-mailt is: kérjük, a benne lévő gombbal erősítsd meg a címed.",
+      confirmTitle: "Még egy lépés: erősítsd meg az e-mail-címed!",
+      confirmText: (email: string) =>
+        `Küldtünk egy levelet ${email ? `ide: ${email}` : "az e-mail-címedre"}. Nyisd meg, és kattints a benne lévő gombra, különben nem tudunk szólni az indulásról.`,
+      confirmSpam: "Nem látod? Nézd meg a Spam vagy a Promóciók mappát is.",
       plan: (plan: string) => ` ${/^[AÁEÉIÍOÓÖŐUÚÜŰ]/.test(plan) ? "Az" : "A"} ${plan} csomag részleteit is hamarosan elküldjük.`,
     },
     end: {
