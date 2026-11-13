@@ -42,6 +42,8 @@
 - **Fix to the design:** with reduced motion turned on, the headline stayed invisible in the original. It now shows.
 - **Still placeholders:** the Facebook and TikTok links, as in the design package.
 - **Go live now:** Benjamin decided to launch the landing page without waiting for the trademark opinion, accepting the risk of a later rename. This replaces the launch gate from 2026-11-06.
+- **Vercel:** the project goes into Benjamin's existing "Bekes" Pro team, next to Sleeve, to avoid a second Pro plan. Sleeve's project is not touched. This replaces "new accounts" for Vercel; Supabase stays in its own organisation.
+- **Sleeve paused (2026-11-13):** at Benjamin's request the `sleeveclub` Vercel project is paused (site returns 503, nothing deleted, can be resumed in the Vercel dashboard). Its Supabase project was already inactive.
 - **Data controller:** Mancsklub Kft. Its address and registration number go in `site.controller` before the forms open.
 
 ## Still open
