@@ -86,3 +86,9 @@
 - The letter text is the owner's, in `t.surveyEmail`, designed in the shared email frame (`surveyEmailHtml`). It adds "elég válaszolni erre a levélre" so people know how to name their clinic.
 - A new admin page, `/admin/levelek`, shows the preview and sends a test only to the logged-in admin's own address. Sending to the whole list is not built yet, on purpose.
 - Open before the real send: confirming in this letter means agreeing to weekly updates, which is marketing, so the confirm step may need to record marketing consent. To check with the owner and the lawyer.
+
+## 2026-11-13: Sending the survey letter
+
+- `/admin/levelek` has a "Kiküldés" button for the survey letter. One click sends at most 90 letters (Resend batch API), because the free plan allows 100 emails a day and signup confirmations need the rest. `survey_email_sent_at` makes sure nobody gets it twice; a failed batch is put back.
+- Only people from the survey who have not confirmed get it. The button needs a ticked "I understand this sends real emails" box, and every batch is in the audit log.
+- The letter says that confirming means weekly updates, so confirming after getting it also records marketing consent. Site signups who confirm do not get marketing consent from that click. To be checked by the lawyer with the other privacy questions.

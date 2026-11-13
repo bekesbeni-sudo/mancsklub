@@ -101,7 +101,14 @@ export async function claimConfirmationEmail(db: Db, email: string): Promise<str
 // True when the signup exists. Pressing the button twice keeps the first date.
 export async function confirmWaitlistSignup(db: Db, signupId: string): Promise<boolean> {
   const rows = await db.query(
-    "update waitlist_signups set confirmed_at = coalesce(confirmed_at, now()) where id::text = $1 returning id",
+    // The survey letter says that confirming means weekly updates, so for those who got it the
+    // click also records the marketing consent.
+    `update waitlist_signups set
+       confirmed_at = coalesce(confirmed_at, now()),
+       marketing_consent = marketing_consent or survey_email_sent_at is not null,
+       marketing_consent_at = case when marketing_consent then marketing_consent_at
+                                   when survey_email_sent_at is not null then now() end
+     where id::text = $1 returning id`,
     [signupId],
   );
   return rows.length > 0;

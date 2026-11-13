@@ -198,12 +198,40 @@ export async function petBelongsTo(db: Db, petId: string, ownerId: string): Prom
   return rows.length > 0;
 }
 
-// People from the survey who have not confirmed yet: the audience of the first survey letter.
-export async function surveyAudienceCount(db: Db): Promise<number> {
-  const [row] = await db.query<{ n: number }>(
-    "select count(*)::int as n from waitlist_signups where source = 'form' and confirmed_at is null",
+// The free Resend plan allows 100 emails a day, and signup confirmations need some of that too.
+export const SURVEY_BATCH = 90;
+
+// The first survey letter goes to people from the survey who have not confirmed and have not had it yet.
+export async function surveyAudience(db: Db): Promise<{ total: number; sent: number; left: number }> {
+  const [row] = await db.query<{ total: number; sent: number; left: number }>(
+    `select count(*)::int as total,
+            count(survey_email_sent_at)::int as sent,
+            count(*) filter (where survey_email_sent_at is null and confirmed_at is null)::int as left
+     from waitlist_signups where source = 'form'`,
   );
-  return row?.n ?? 0;
+  return row ?? { total: 0, sent: 0, left: 0 };
+}
+
+// Marks the next batch as sent and returns it. If sending then fails, releaseSurveyBatch undoes it.
+export async function claimSurveyBatch(db: Db, limit: number, actor: string): Promise<{ id: string; email: string }[]> {
+  return db.transaction(async (tx) => {
+    const rows = await tx.query<{ id: string; email: string }>(
+      `update waitlist_signups set survey_email_sent_at = now()
+       where id in (
+         select id from waitlist_signups
+         where source = 'form' and confirmed_at is null and survey_email_sent_at is null
+         order by created_at limit $1 for update skip locked
+       )
+       returning id, email`,
+      [limit],
+    );
+    if (rows.length > 0) await audit(tx, actor, "survey_email.send", "waitlist", "survey", { count: rows.length });
+    return rows;
+  });
+}
+
+export async function releaseSurveyBatch(db: Db, ids: string[]): Promise<void> {
+  await db.query("update waitlist_signups set survey_email_sent_at = null where id::text = any($1::text[])", [ids]);
 }
 
 export async function signupIdByEmail(db: Db, email: string): Promise<string | null> {

@@ -62,3 +62,37 @@ export async function sendSurveyEmail(to: string, siteUrl: string, confirmUrl: s
   const s = t.surveyEmail;
   return send(to, s.subject, s.body(siteUrl, confirmUrl), surveyEmailHtml(confirmUrl));
 }
+
+// Up to 100 survey letters in one Resend batch call. Returns whether Resend accepted them.
+export async function sendSurveyBatch(items: { to: string; confirmUrl: string }[], siteUrl: string): Promise<boolean> {
+  if (items.length === 0) return true;
+  if (!process.env.RESEND_API_KEY) {
+    if (process.env.NODE_ENV === "production") {
+      console.error("RESEND_API_KEY is not set, survey batch not sent");
+      return false;
+    }
+    for (const item of items) console.info(`Survey email to ${item.to}: ${item.confirmUrl}`);
+    return true;
+  }
+  const s = t.surveyEmail;
+  try {
+    const response = await fetch("https://api.resend.com/emails/batch", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify(
+        items.map((item) => ({
+          from: `${site.name} <${site.contactEmail}>`,
+          to: item.to,
+          subject: s.subject,
+          text: s.body(siteUrl, item.confirmUrl),
+          html: surveyEmailHtml(item.confirmUrl),
+        })),
+      ),
+    });
+    if (!response.ok) console.error(`Survey batch failed: ${response.status} ${await response.text()}`);
+    return response.ok;
+  } catch (error) {
+    console.error("Survey batch failed", error);
+    return false;
+  }
+}
