@@ -13,9 +13,15 @@ export default function PrivacyPage() {
       <p className="mt-3 text-sm text-muted">{p.draft}</p>
       <h2 className="mt-8 text-lg font-semibold">{p.controllerTitle}</h2>
       <p className="mt-1 text-muted">
-        {controller
-          ? `${controller.name}, ${controller.address}, ${controller.registrationNumber}`
-          : p.controllerMissing}
+        {controller ? (
+          <>
+            {p.controllerText(controller.name, controller.address)} {p.controllerContact}{" "}
+            <a href={`mailto:${site.contactEmail}`} className="underline">{site.contactEmail}</a>{" "}
+            {p.controllerPost}
+          </>
+        ) : (
+          p.controllerMissing
+        )}
       </p>
       {p.sections.map((section) => (
         <section key={section.title}>

@@ -350,6 +350,10 @@ export const hu = {
     title: "Adatkezelési tájékoztató",
     draft: "Tervezet, jogi ellenőrzés előtt.",
     controllerTitle: "Ki kezeli az adataidat?",
+    controllerText: (name: string, address: string) =>
+      `Az ezen az oldalon leírt személyes adatok kezelője a ${name} (${address}).`,
+    controllerContact: "Az adatkezeléssel kapcsolatban itt érsz el minket:",
+    controllerPost: "vagy postán, a fenti címen.",
     controllerMissing: "Az adatkezelő adatai az indulás előtt kerülnek ide.",
     sections: [
       {

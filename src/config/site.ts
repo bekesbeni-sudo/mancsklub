@@ -7,12 +7,10 @@ export const site = {
   contactEmail: "info@mancsklub.hu",
   instagram: "https://www.instagram.com/mancsklub/",
   // Who collects the data. Must be filled in before the forms can open in production.
-  // The company is under registration ("bejegyzés alatt"): swap in the real number once the court issues it.
   controller: {
-    name: "Mancsklub Kft. bejegyzés alatt",
-    address: "1124 Budapest, Fürj utca 2.",
-    registrationNumber: "cégjegyzékszám: bejegyzés alatt",
-  } as null | { name: string; address: string; registrationNumber: string },
+    name: "Mancsklub Kft.",
+    address: "1124 Budapest, Fürj u. 2.",
+  } as null | { name: string; address: string },
   privacyVersion: "2026-11-06-draft",
 };
 
