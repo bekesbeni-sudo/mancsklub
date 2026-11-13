@@ -18,3 +18,4 @@
 - Admin queries for the waitlist, enquiries, owners and pets are in `src/lib/admin-queries.ts`. Private pages set `export const instant = false` and call `await connection()`.
 - Without `RESEND_API_KEY`, the owner login link is printed in the dev server log.
 - Local test login: username `admin`, password in `.env.local`.
+- Admins have own accounts in `admin_users`, managed on `/admin/csapat` (`src/lib/admin-users.ts`). The shared `admin` login is the fallback. Password links are printed in the dev server log when there is no `RESEND_API_KEY`.

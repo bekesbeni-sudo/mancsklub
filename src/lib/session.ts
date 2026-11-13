@@ -1,7 +1,8 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export type Session =
-  | { role: "admin"; exp: number }
+  // adminId is missing for the shared fallback login.
+  | { role: "admin"; adminId?: string; exp: number }
   | { role: "clinic"; userId: string; exp: number }
   | { role: "owner"; ownerId: string; exp: number };
 

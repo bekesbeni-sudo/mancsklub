@@ -1,7 +1,7 @@
 import "server-only";
 import { site } from "@/config/site";
 import { t } from "@/messages";
-import { confirmationEmailHtml } from "./email-template";
+import { adminPasswordEmailHtml, confirmationEmailHtml } from "./email-template";
 
 async function send(to: string, subject: string, text: string, html?: string): Promise<void> {
   try {
@@ -37,4 +37,15 @@ export async function sendLoginLink(to: string, url: string): Promise<void> {
   }
   const e = t.portal.owner.email;
   await send(to, e.subject, e.body(url));
+}
+
+// The link an admin uses to set a password: an invitation from the team page, or a reset.
+export async function sendAdminPasswordLink(to: string, url: string, kind: "invite" | "reset"): Promise<void> {
+  if (!process.env.RESEND_API_KEY) {
+    if (process.env.NODE_ENV === "production") console.error("RESEND_API_KEY is not set, password link not sent");
+    else console.info(`Admin password link (${kind}): ${url}`);
+    return;
+  }
+  const a = t.portal.password.email[kind];
+  await send(to, a.subject, a.body(url), adminPasswordEmailHtml(url, kind));
 }

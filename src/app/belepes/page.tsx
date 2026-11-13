@@ -31,6 +31,7 @@ export default function LoginPage() {
           </label>
         </ActionForm>
         <p style={{ marginTop: 20 }}>
+          <Link href="/belepes/elfelejtett" className="mk-link">{l.forgot}</Link>
           <Link href="/gazdi/belepes" className="mk-link">{t.portal.owner.login.owners}</Link>
         </p>
       </div>

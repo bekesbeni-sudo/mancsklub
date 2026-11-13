@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { NavBadge } from "@/components/shell";
 import { getStaff } from "@/lib/auth";
 import { getDb } from "@/lib/db";
@@ -7,6 +8,8 @@ import { t } from "@/messages";
 // The number of people waiting, next to "Várólista" in the admin menu. It checks the login itself,
 // because a layout can render before the page's own login check.
 export async function WaitlistBadge() {
+  // Reads the login and the database, so it can only render for a real request.
+  await connection();
   const staff = await getStaff();
   if (staff?.role !== "admin") return null;
   const count = await waitingCount(await getDb());

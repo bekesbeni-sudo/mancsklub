@@ -1,6 +1,7 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getActiveAdmin } from "./admin-users";
 import { getDb } from "./db";
 import { decodeSession, encodeSession, type Session } from "./session";
 
@@ -15,7 +16,7 @@ function secret(): string {
 }
 
 export async function startSession(
-  session: { role: "admin" } | { role: "clinic"; userId: string } | { role: "owner"; ownerId: string },
+  session: { role: "admin"; adminId?: string } | { role: "clinic"; userId: string } | { role: "owner"; ownerId: string },
 ) {
   const hours = session.role === "owner" ? OWNER_HOURS : STAFF_HOURS;
   const exp = Date.now() + hours * 3600 * 1000;
@@ -40,14 +41,19 @@ async function readSession(): Promise<Session | null> {
 }
 
 export type Staff =
-  | { role: "admin"; actor: string }
+  | { role: "admin"; actor: string; adminId: string | null; name: string }
   | { role: "clinic"; actor: string; clinicId: string; clinicName: string; userName: string };
 
 // Checks the database on every request, so a disabled user is out at once.
 export async function getStaff(): Promise<Staff | null> {
   const session = await readSession();
   if (session?.role !== "admin" && session?.role !== "clinic") return null;
-  if (session.role === "admin") return { role: "admin", actor: "admin" };
+  if (session.role === "admin") {
+    // The shared fallback login has no account behind it.
+    if (!session.adminId) return { role: "admin", actor: "admin", adminId: null, name: "admin" };
+    const admin = await getActiveAdmin(await getDb(), session.adminId);
+    return admin ? { role: "admin", actor: admin.email, adminId: admin.id, name: admin.name } : null;
+  }
   const db = await getDb();
   const [user] = await db.query<{ email: string; name: string; clinic_id: string; clinic_name: string }>(
     `select u.email, u.name, u.clinic_id, c.name as clinic_name
