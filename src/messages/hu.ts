@@ -531,6 +531,8 @@ export const hu = {
         subject: "Tárgy:",
         audience: (total: number, sent: number, left: number) =>
           `A kérdőívből ${total} cím van a várólistán. Eddig ${sent} fő kapta meg a levelet, ${left} főnek még nem ment ki.`,
+        invalid: (n: number) =>
+          `${n} cím hibás (például ékezet vagy szóköz van benne), ezekre nem megy levél, a többiekre igen:`,
         testFirst: "Kiküldés előtt küldj magadnak próbát, és nézd meg a telefonodon is.",
         test: "Próbalevél küldése nekem",
         sendTitle: "Kiküldés a kérdőíveseknek",

@@ -22,6 +22,14 @@ describe("survey letter batches", () => {
     await db.query("insert into waitlist_signups (email, privacy_version) values ('site@example.com', 'v1')");
   });
 
+  it("skips addresses Resend would reject, so one bad address cannot block the batch", async () => {
+    await addFromForm("bíró.x@gmail.com");
+    const batch = await claimSurveyBatch(db, 10, "admin");
+    expect(batch.map((r) => r.email)).not.toContain("bíró.x@gmail.com");
+    expect(batch).toHaveLength(5);
+    expect((await surveyAudience(db)).invalid).toEqual(["bíró.x@gmail.com"]);
+  });
+
   it("sends each survey address once, in batches, and never to site signups", async () => {
     const first = await claimSurveyBatch(db, 3, "admin");
     const second = await claimSurveyBatch(db, 3, "admin");
@@ -32,13 +40,13 @@ describe("survey letter batches", () => {
     const all = [...first, ...second].map((r) => r.email);
     expect(new Set(all).size).toBe(5);
     expect(all).not.toContain("site@example.com");
-    expect(await surveyAudience(db)).toEqual({ total: 5, sent: 5, left: 0 });
+    expect(await surveyAudience(db)).toEqual({ total: 5, sent: 5, left: 0, invalid: [] });
   });
 
   it("puts a failed batch back so it can be sent again", async () => {
     const batch = await claimSurveyBatch(db, 2, "admin");
     await releaseSurveyBatch(db, batch.map((r) => r.id));
-    expect(await surveyAudience(db)).toEqual({ total: 5, sent: 0, left: 5 });
+    expect(await surveyAudience(db)).toEqual({ total: 5, sent: 0, left: 5, invalid: [] });
   });
 
   it("skips people who confirmed already", async () => {

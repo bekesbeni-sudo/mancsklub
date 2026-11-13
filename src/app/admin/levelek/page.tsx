@@ -24,6 +24,11 @@ export default async function EmailsPage() {
         <h2 className="mk-h">{m.surveyTitle}</h2>
         <p style={{ marginTop: 0 }}><strong>{m.subject}</strong> {t.surveyEmail.subject}</p>
         <p className="mk-muted">{m.audience(audience.total, audience.sent, audience.left)}</p>
+        {audience.invalid.length > 0 && (
+          <p className="mk-muted">
+            {m.invalid(audience.invalid.length)} {audience.invalid.join(", ")}
+          </p>
+        )}
         <p className="mk-muted" style={{ marginBottom: 16 }}>{m.testFirst}</p>
         {staff.adminId ? (
           <ActionForm action={sendSurveyTest} submit={m.test} variant="secondary" />
