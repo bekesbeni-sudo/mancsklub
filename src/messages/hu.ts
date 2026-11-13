@@ -352,6 +352,39 @@ export const hu = {
     body: (url: string) =>
       `Szia!\n\nKöszönjük, hogy feliratkoztál a ${site.name} várólistájára. Már csak egy kattintás van hátra: erősítsd meg, hogy ez a te e-mail-címed.\n\n${url}\n\nHa nem te iratkoztál fel, nincs teendőd, ezt a levelet nyugodtan törölheted.\n\nÜdvözlettel:\n${site.name}`,
   },
+  surveyEmail: {
+    subject: "Köszönjük a válaszokat! Íme, mi lett belőlük 🐾",
+    preheader: `A kérdőívetek alapján belevágtunk: elindult a ${site.name}.`,
+    title: "Köszönjük a válaszokat!",
+    hello: "Sziasztok, gazdik!",
+    intro: [
+      "Pár hete küldtünk nektek egy rövid kérdőívet, hogy jobban megértsük, hogyan jártok állatorvoshoz a kedvenceitekkel, és miben tudnánk segíteni.",
+      "Meglepően sokan töltöttétek ki, amit nagyon köszönünk! A válaszaitokból két dolog egyértelműen kiderült:",
+    ],
+    findingsTitle: "Amit a válaszaitokból megtudtunk",
+    findings: [
+      "Az állatorvosi költség valódi teher, főleg a váratlan kiadások.",
+      "Sokan nyitottak lennétek egy olyan megoldásra, amely ezt kiszámíthatóbbá és kedvezőbbé teszi.",
+    ],
+    launch: [
+      `Ezért nem ültünk tétlenül. Örömmel jelentjük be, hogy a ti visszajelzéseitek alapján ${site.name} néven belevágtunk.`,
+      "Elindult a weboldalunk, itt találod:",
+    ],
+    siteButton: `Megnézem: ${site.domain}`,
+    clinics:
+      "Most gőzerővel azon dolgozunk, hogy minél több partnerrendelőt megnyerjünk, és nektek minél több lehetőségetek legyen az induláskor. Ha van kedvenc rendelőd, írd meg nekünk (elég válaszolni erre a levélre), és megkeressük őket!",
+    confirm: [
+      "Nem fogunk spamelni. Hetente egy rövid levelet küldünk arról, hogyan haladunk, és az elsők között szólunk, amikor indulunk.",
+      "Ha kíváncsi vagy rá, itt tudod megerősíteni az e-mail-címedet:",
+    ],
+    confirmButton: "Megerősítem az e-mail-címem",
+    noConfirm: "Ha nem erősíted meg, több levelet nem küldünk.",
+    bye: "Köszönjük, hogy velünk vagytok!",
+    team: `A ${site.name} csapata`,
+    reason: "Ezt a levelet azért kaptad, mert a kérdőívünkben megadtad az e-mail-címed, hogy értesítsünk az indulásról.",
+    body: (siteUrl: string, confirmUrl: string) =>
+      `Sziasztok, gazdik!\n\nPár hete küldtünk nektek egy rövid kérdőívet, hogy jobban megértsük, hogyan jártok állatorvoshoz a kedvenceitekkel, és miben tudnánk segíteni.\n\nMeglepően sokan töltöttétek ki, amit nagyon köszönünk! A válaszaitokból két dolog egyértelműen kiderült:\n1. Az állatorvosi költség valódi teher, főleg a váratlan kiadások.\n2. Sokan nyitottak lennétek egy olyan megoldásra, amely ezt kiszámíthatóbbá és kedvezőbbé teszi.\n\nEzért nem ültünk tétlenül. Örömmel jelentjük be, hogy a ti visszajelzéseitek alapján ${site.name} néven belevágtunk.\n\nElindult a weboldalunk, itt találod: ${siteUrl}\n\nMost gőzerővel azon dolgozunk, hogy minél több partnerrendelőt megnyerjünk, és nektek minél több lehetőségetek legyen az induláskor. Ha van kedvenc rendelőd, írd meg nekünk (elég válaszolni erre a levélre), és megkeressük őket!\n\nNem fogunk spamelni. Hetente egy rövid levelet küldünk arról, hogyan haladunk, és az elsők között szólunk, amikor indulunk. Ha kíváncsi vagy rá, itt tudod megerősíteni az e-mail-címedet:\n${confirmUrl}\n\nHa nem erősíted meg, több levelet nem küldünk.\n\nKöszönjük, hogy velünk vagytok!\nA ${site.name} csapata`,
+  },
   confirm: {
     metaTitle: `Feliratkozás megerősítése | ${site.name}`,
     title: "Még egy kattintás",
@@ -487,7 +520,20 @@ export const hu = {
     },
     admin: {
       area: "Admin",
-      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás", team: "Csapat", waitingCount: (n: number) => `${n} fő vár a várólistán` },
+      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás", team: "Csapat", emails: "Levelek", waitingCount: (n: number) => `${n} fő vár a várólistán` },
+      emails: {
+        title: "Levelek",
+        sub: "Körlevelek a várólistának. Előbb mindig küldj magadnak próbát.",
+        surveyTitle: "Első levél a kérdőíveseknek",
+        subject: "Tárgy:",
+        recipients: (n: number) => `Címzettek: ${n} fő a kérdőívből, akik még nem erősítették meg a címüket.`,
+        notSent: "A valódi kiküldés még nincs bekapcsolva, most csak próbát tudsz küldeni magadnak.",
+        test: "Próbalevél küldése nekem",
+        testSent: (email: string) => `Elküldtük a próbalevelet ide: ${email}`,
+        needOwnLogin: "Próbát csak saját fiókkal tudsz küldeni. Lépj be a saját e-mail-címeddel.",
+        notOnList: "A próbalevélben a megerősítő gomb csak akkor működik, ha a címed rajta van a várólistán.",
+        preview: "Előnézet",
+      },
       team: {
         title: "Csapat",
         sub: "Akik beléphetnek az admin felületre. Mindenki a saját e-mail-címével és jelszavával lép be.",

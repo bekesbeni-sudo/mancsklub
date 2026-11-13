@@ -80,3 +80,9 @@
 - Vercel Web Analytics is on, loaded from the root layout (`src/components/site-analytics.tsx`). It sets no cookies, so the "no tracking cookies" line on the privacy page stays true.
 - Private areas (`/admin`, `/rendelo`, `/belepes`, `/gazdi`, `/elszamolas`) are not counted, and query strings are dropped because some links carry one-time tokens (`src/lib/analytics.ts`).
 - Whether the privacy page should mention the anonymous visit statistics goes to the lawyer with the other privacy questions.
+
+## 2026-11-13: First letter to the survey people
+
+- The letter text is the owner's, in `t.surveyEmail`, designed in the shared email frame (`surveyEmailHtml`). It adds "elég válaszolni erre a levélre" so people know how to name their clinic.
+- A new admin page, `/admin/levelek`, shows the preview and sends a test only to the logged-in admin's own address. Sending to the whole list is not built yet, on purpose.
+- Open before the real send: confirming in this letter means agreeing to weekly updates, which is marketing, so the confirm step may need to record marketing consent. To check with the owner and the lawyer.

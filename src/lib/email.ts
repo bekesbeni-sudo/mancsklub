@@ -1,9 +1,9 @@
 import "server-only";
 import { site } from "@/config/site";
 import { t } from "@/messages";
-import { adminPasswordEmailHtml, confirmationEmailHtml } from "./email-template";
+import { adminPasswordEmailHtml, confirmationEmailHtml, surveyEmailHtml } from "./email-template";
 
-async function send(to: string, subject: string, text: string, html?: string): Promise<void> {
+async function send(to: string, subject: string, text: string, html?: string): Promise<boolean> {
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -11,8 +11,10 @@ async function send(to: string, subject: string, text: string, html?: string): P
       body: JSON.stringify({ from: `${site.name} <${site.contactEmail}>`, to, subject, text, html }),
     });
     if (!response.ok) console.error(`Email failed: ${response.status}`);
+    return response.ok;
   } catch (error) {
     console.error("Email failed", error);
+    return false;
   }
 }
 
@@ -48,4 +50,15 @@ export async function sendAdminPasswordLink(to: string, url: string, kind: "invi
   }
   const a = t.portal.password.email[kind];
   await send(to, a.subject, a.body(url), adminPasswordEmailHtml(url, kind));
+}
+
+// The first letter to the people imported from the survey. Returns whether it went out.
+export async function sendSurveyEmail(to: string, siteUrl: string, confirmUrl: string): Promise<boolean> {
+  if (!process.env.RESEND_API_KEY) {
+    if (process.env.NODE_ENV === "production") console.error("RESEND_API_KEY is not set, survey email not sent");
+    else console.info(`Survey email to ${to}, confirmation link: ${confirmUrl}`);
+    return process.env.NODE_ENV !== "production";
+  }
+  const s = t.surveyEmail;
+  return send(to, s.subject, s.body(siteUrl, confirmUrl), surveyEmailHtml(confirmUrl));
 }

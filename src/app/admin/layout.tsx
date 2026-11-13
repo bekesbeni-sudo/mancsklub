@@ -29,6 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { href: "/admin/javaslatok", label: n.suggested },
         { href: "/admin/arak", label: n.prices },
         { href: "/admin/elszamolas", label: n.settlement },
+        { href: "/admin/levelek", label: n.emails },
         { href: "/admin/csapat", label: n.team },
       ]}
     >

@@ -197,3 +197,16 @@ export async function petBelongsTo(db: Db, petId: string, ownerId: string): Prom
   const rows = await db.query("select 1 from pets where id = $1 and owner_id = $2", [petId, ownerId]);
   return rows.length > 0;
 }
+
+// People from the survey who have not confirmed yet: the audience of the first survey letter.
+export async function surveyAudienceCount(db: Db): Promise<number> {
+  const [row] = await db.query<{ n: number }>(
+    "select count(*)::int as n from waitlist_signups where source = 'form' and confirmed_at is null",
+  );
+  return row?.n ?? 0;
+}
+
+export async function signupIdByEmail(db: Db, email: string): Promise<string | null> {
+  const [row] = await db.query<{ id: string }>("select id from waitlist_signups where email = $1", [email.toLowerCase()]);
+  return row?.id ?? null;
+}
