@@ -85,6 +85,28 @@ export async function addWaitlistSignup(
   return { created: rows.length > 0, id: rows[0]?.id ?? null };
 }
 
+// Says whether a confirmation email should go out now, and marks it as sent. At most one an
+// hour per address, so the form cannot be used to flood someone's inbox.
+export async function claimConfirmationEmail(db: Db, email: string): Promise<string | null> {
+  const rows = await db.query<{ id: string }>(
+    `update waitlist_signups set confirmation_sent_at = now()
+     where email = $1 and confirmed_at is null
+       and (confirmation_sent_at is null or confirmation_sent_at < now() - interval '1 hour')
+     returning id`,
+    [email],
+  );
+  return rows[0]?.id ?? null;
+}
+
+// True when the signup exists. Pressing the button twice keeps the first date.
+export async function confirmWaitlistSignup(db: Db, signupId: string): Promise<boolean> {
+  const rows = await db.query(
+    "update waitlist_signups set confirmed_at = coalesce(confirmed_at, now()) where id::text = $1 returning id",
+    [signupId],
+  );
+  return rows.length > 0;
+}
+
 export async function addClinicSuggestion(db: Db, clinicName: string, signupId: string | null): Promise<void> {
   await db.query(
     `insert into clinic_suggestions (clinic_name, signup_id)
@@ -124,12 +146,13 @@ export type WaitlistRow = {
   current_clinic: string | null;
   package_code: string | null;
   marketing_consent: boolean;
+  confirmed_at: Date | null;
 };
 
 export function listWaitlist(db: Db): Promise<WaitlistRow[]> {
   return db.query<WaitlistRow>(
     `select created_at, email, pet_name, pet_count, species, location, current_clinic,
-            package_code, marketing_consent
+            package_code, marketing_consent, confirmed_at
      from waitlist_signups order by created_at`,
   );
 }

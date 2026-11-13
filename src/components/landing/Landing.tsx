@@ -562,7 +562,7 @@ function useLandingModel() {
     sent,
     notSent: !sent,
     successTitle: l.success.title(name),
-    successPlan: interestName ? l.success.plan(interestName) : "",
+    successPlan: (interestName ? l.success.plan(interestName) : "") + l.success.confirm,
     ctaTitle: sent ? l.end.title.after : l.end.title.before,
     ctaTitle2: sent ? "" : l.end.title2,
     ctaText: sent ? l.end.text.after : l.end.text.before,

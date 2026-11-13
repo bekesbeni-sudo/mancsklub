@@ -284,6 +284,7 @@ export const hu = {
     step: (n: number) => `${n}. lépés`,
     success: {
       title: (name: string) => (name ? `${name} már várja az indulást!` : "Rajta vagy a várólistán!"),
+      confirm: " Küldtünk egy e-mailt is: kérjük, a benne lévő gombbal erősítsd meg a címed.",
       plan: (plan: string) => ` ${/^[AÁEÉIÍOÓÖŐUÚÜŰ]/.test(plan) ? "Az" : "A"} ${plan} csomag részleteit is hamarosan elküldjük.`,
     },
     end: {
@@ -341,8 +342,23 @@ export const hu = {
     privacy: "A folytatáshoz el kell fogadnod a tájékoztatót.",
   },
   email: {
-    subject: `Rajta vagy a ${site.name} várólistáján`,
-    body: `Szia!\n\nKöszönjük, hogy feliratkoztál a ${site.name} várólistájára. Szólunk, amint indulunk.\n\nÜdvözlettel:\n${site.name}`,
+    subject: `Erősítsd meg a feliratkozásod a ${site.name} várólistájára`,
+    hello: "Szia!",
+    lead: `Köszönjük, hogy feliratkoztál a ${site.name} várólistájára. Már csak egy kattintás van hátra: erősítsd meg, hogy ez a te e-mail-címed.`,
+    button: "Megerősítem",
+    ignore: "Ha nem te iratkoztál fel, nincs teendőd, ezt a levelet nyugodtan törölheted.",
+    bye: "Üdvözlettel:",
+    body: (url: string) =>
+      `Szia!\n\nKöszönjük, hogy feliratkoztál a ${site.name} várólistájára. Már csak egy kattintás van hátra: erősítsd meg, hogy ez a te e-mail-címed.\n\n${url}\n\nHa nem te iratkoztál fel, nincs teendőd, ezt a levelet nyugodtan törölheted.\n\nÜdvözlettel:\n${site.name}`,
+  },
+  confirm: {
+    metaTitle: `Feliratkozás megerősítése | ${site.name}`,
+    title: "Még egy kattintás",
+    lead: "A gomb megnyomásával megerősíted a feliratkozásod a várólistára.",
+    submit: "Megerősítem",
+    done: "Köszönjük, megerősítetted a feliratkozásod! Szólunk, amint indulunk.",
+    failed: "Ez a link nem érvényes. Iratkozz fel újra a főoldalon, és küldünk egy újat.",
+    home: "Vissza a főoldalra",
   },
   footer: { clinics: "Rendelőknek" },
   privacy: {
@@ -489,6 +505,9 @@ export const hu = {
         status: "Állapot",
         waiting: "Vár",
         converted: "Tag lett",
+        confirmed: "Megerősítve",
+        yes: "Igen",
+        no: "Nem",
         convert: "Taggá alakítás",
         open: "Tag megnyitása",
         both: "Mindkettő",

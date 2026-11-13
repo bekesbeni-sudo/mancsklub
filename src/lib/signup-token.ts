@@ -28,3 +28,20 @@ export function readSignupToken(token: string | null, now = Date.now()): string 
   if (given.length !== expected.length || !timingSafeEqual(given, expected)) return null;
   return Number(exp) > now ? id : null;
 }
+
+// The link in the confirmation email. It does not expire: confirming late is still a confirmation.
+const signConfirm = (id: string) => createHmac("sha256", secret()).update(`confirm:${id}`).digest("base64url");
+
+export function confirmToken(signupId: string): string {
+  return `${signupId}.${signConfirm(signupId)}`;
+}
+
+export function readConfirmToken(token: string | null): string | null {
+  if (!token) return null;
+  const parts = token.split(".");
+  if (parts.length !== 2) return null;
+  const [id, signature] = parts;
+  const given = Buffer.from(signature);
+  const expected = Buffer.from(signConfirm(id));
+  return given.length === expected.length && timingSafeEqual(given, expected) ? id : null;
+}

@@ -1,11 +1,19 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
+import { headers } from "next/headers";
+import { after } from "next/server";
 import { formsOpen, site } from "@/config/site";
 import { getDb } from "@/lib/db";
 import { sendWaitlistConfirmation } from "@/lib/email";
-import { addClinicInterest, addClinicSuggestion, addWaitlistSignup } from "@/lib/queries";
-import { readSignupToken, signupToken } from "@/lib/signup-token";
+import {
+  addClinicInterest,
+  addClinicSuggestion,
+  addWaitlistSignup,
+  claimConfirmationEmail,
+  confirmWaitlistSignup,
+} from "@/lib/queries";
+import { confirmToken, readConfirmToken, readSignupToken, signupToken } from "@/lib/signup-token";
 import { clinicSchema, clinicSuggestionSchema, fieldErrors, waitlistSchema } from "@/lib/validation";
 import { t } from "@/messages";
 
@@ -24,6 +32,23 @@ function formValues(formData: FormData): Record<string, string> {
   return values;
 }
 
+// In production the address is fixed, so a forged Host header cannot end up in an email.
+async function baseUrl(): Promise<string> {
+  if (process.env.NODE_ENV === "production") return `https://${site.domain}`;
+  return `http://${(await headers()).get("host")}`;
+}
+
+// The button on the page behind the emailed link.
+export async function confirmSignup(_: { error?: string; ok?: string }, form: FormData) {
+  const id = readConfirmToken(String(form.get("token") ?? ""));
+  try {
+    if (id && (await confirmWaitlistSignup(await getDb(), id))) return { ok: t.confirm.done };
+  } catch (error) {
+    console.error("Waitlist confirmation failed", error);
+  }
+  return { error: t.confirm.failed };
+}
+
 export type JoinResult = { ok: true; token: string } | { ok: false; message: string };
 
 // The landing page's signup. The page checks the email first, so a failure here is rare.
@@ -38,8 +63,14 @@ export async function joinWaitlist(input: {
   if (!parsed.success) return { ok: false, message: Object.values(fieldErrors(parsed.error))[0] ?? t.forms.failed };
   try {
     const db = await getDb();
-    const { created, id } = await addWaitlistSignup(db, parsed.data, site.privacyVersion);
-    if (created) await sendWaitlistConfirmation(parsed.data.email);
+    const { id } = await addWaitlistSignup(db, parsed.data, site.privacyVersion);
+    // New signups get the confirmation email, and so does a repeat that has not confirmed yet.
+    // Sent after the response, so the answer takes as long either way.
+    const pendingId = await claimConfirmationEmail(db, parsed.data.email);
+    if (pendingId) {
+      const url = `${await baseUrl()}/megerosites?token=${confirmToken(pendingId)}`;
+      after(() => sendWaitlistConfirmation(parsed.data.email, url));
+    }
     // Same reply for a repeat email, so the form can't reveal who has signed up. A repeat gets a
     // token for an id that matches no signup, so its clinic suggestion is stored on its own.
     return { ok: true, token: signupToken(id ?? randomUUID()) };

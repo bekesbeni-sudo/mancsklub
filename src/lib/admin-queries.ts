@@ -18,11 +18,12 @@ export type SignupRow = {
   package_code: string | null;
   package_name: string | null;
   converted_membership_id: string | null;
+  confirmed_at: Date | null;
 };
 
 const signupSelect = `
   select w.id, w.created_at, w.email, w.species, w.pet_name, w.package_code,
-         k.name_hu as package_name, w.converted_membership_id
+         k.name_hu as package_name, w.converted_membership_id, w.confirmed_at
   from waitlist_signups w
   left join packages k on k.code = w.package_code`;
 

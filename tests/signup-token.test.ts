@@ -25,4 +25,15 @@ describe("signup token", () => {
     expect(tokens.readSignupToken("nem.jo")).toBeNull();
     expect(tokens.readSignupToken(null)).toBeNull();
   });
+
+  it("gives a confirmation link that only works for its own signup", () => {
+    const token = tokens.confirmToken(id);
+    expect(tokens.readConfirmToken(token)).toBe(id);
+    expect(tokens.readConfirmToken(token.replace("6", "7"))).toBeNull();
+    // A token made for the clinic box must not confirm an address, and the other way round.
+    expect(tokens.readConfirmToken(tokens.signupToken(id))).toBeNull();
+    expect(tokens.readSignupToken(token)).toBeNull();
+    expect(tokens.readConfirmToken("nem.jo")).toBeNull();
+    expect(tokens.readConfirmToken(null)).toBeNull();
+  });
 });

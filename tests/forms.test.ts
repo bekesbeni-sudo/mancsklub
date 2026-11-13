@@ -8,6 +8,8 @@ import {
   addClinicInterest,
   addClinicSuggestion,
   addWaitlistSignup,
+  claimConfirmationEmail,
+  confirmWaitlistSignup,
   getPackages,
   listClinicInterest,
   listWaitlist,
@@ -118,6 +120,26 @@ describe("database", () => {
     const rows = await listWaitlist(db);
     expect(rows).toHaveLength(1);
     expect(rows[0].pet_name).toBe("Bodza");
+  });
+
+  it("sends one confirmation email an hour until the address is confirmed", async () => {
+    const input = waitlistSchema.parse(valid);
+    const { id } = await addWaitlistSignup(db, input, "v1");
+    expect(await claimConfirmationEmail(db, input.email)).toBe(id);
+    expect(await claimConfirmationEmail(db, input.email)).toBeNull();
+    await db.query("update waitlist_signups set confirmation_sent_at = now() - interval '2 hours'");
+    expect(await claimConfirmationEmail(db, input.email)).toBe(id);
+    expect(await claimConfirmationEmail(db, "ismeretlen@example.hu")).toBeNull();
+
+    expect(await confirmWaitlistSignup(db, id as string)).toBe(true);
+    const [first] = await listWaitlist(db);
+    expect(first.confirmed_at).not.toBeNull();
+    // A second press keeps the first date, and a confirmed address gets no more emails.
+    expect(await confirmWaitlistSignup(db, id as string)).toBe(true);
+    expect((await listWaitlist(db))[0].confirmed_at).toEqual(first.confirmed_at);
+    await db.query("update waitlist_signups set confirmation_sent_at = now() - interval '2 hours'");
+    expect(await claimConfirmationEmail(db, input.email)).toBeNull();
+    expect(await confirmWaitlistSignup(db, "nem-azonosito")).toBe(false);
   });
 
   it("accepts the six landing packages and nothing else", async () => {

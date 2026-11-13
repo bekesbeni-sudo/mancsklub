@@ -38,7 +38,7 @@ export default async function WaitlistPage({ searchParams }: PageProps<"/admin/v
           <div className="mk-tablewrap">
             <table className="mk-table">
               <thead>
-                <tr><th>{w.date}</th><th>{w.email}</th><th>{w.pet}</th><th>{w.species}</th><th>{w.package}</th><th>{w.status}</th><th></th></tr>
+                <tr><th>{w.date}</th><th>{w.email}</th><th>{w.pet}</th><th>{w.species}</th><th>{w.package}</th><th>{w.confirmed}</th><th>{w.status}</th><th></th></tr>
               </thead>
               <tbody>
                 {signups.map((row) => (
@@ -48,6 +48,7 @@ export default async function WaitlistPage({ searchParams }: PageProps<"/admin/v
                     <td>{row.pet_name}</td>
                     <td>{row.species && species[row.species]}</td>
                     <td>{row.package_name ?? planName(row.package_code)}</td>
+                    <td>{row.confirmed_at ? w.yes : w.no}</td>
                     <td>{row.converted_membership_id ? w.converted : w.waiting}</td>
                     <td>
                       {row.converted_membership_id ? (
