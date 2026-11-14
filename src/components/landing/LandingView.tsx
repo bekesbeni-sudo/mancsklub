@@ -188,7 +188,9 @@ export function LandingView({ v }: { v: LandingModel }) {
             </h1>
             {" "}
             <p className="fade" style={{ margin: "26px auto 38px", maxWidth: "520px", fontSize: "18.5px", lineHeight: "1.6", color: "#7A6A5D", animationDelay: "250ms" }}>
-              {m.hero.megelozoAllatorvosiEllatasHavi}
+              {m.hero.megelozoAllatorvosiEllatasHavi}{" "}
+              <strong className="hx-deal">{m.hero.kedvezmenyesen}</strong>
+              {m.hero.haviElofizetessel}
             </p>
             {" "}
             <div className="fade" style={{ animationDelay: "380ms" }}>
