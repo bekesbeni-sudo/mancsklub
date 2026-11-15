@@ -525,7 +525,7 @@ export const hu = {
     },
     admin: {
       area: "Admin",
-      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás", team: "Csapat", emails: "Levelek", waitingCount: (n: number) => `${n} fő vár a várólistán` },
+      nav: { overview: "Áttekintés", waitlist: "Várólista", owners: "Gazdik", members: "Tagok", partners: "Partnerek", clinics: "Rendelők", suggested: "Javasolt rendelők", prices: "Árak", settlement: "Elszámolás", team: "Csapat", emails: "Levelek", waitingCount: (n: number) => `${n} fő vár a várólistán` },
       emails: {
         title: "Levelek",
         sub: "Körlevelek a várólistának. Előbb mindig küldj magadnak próbát.",
@@ -611,7 +611,7 @@ export const hu = {
       },
       clinics: {
         title: "Rendelők",
-        sub: "Partnerek és érdeklődők egy helyen.",
+        sub: "A szerződött és tárgyalás alatt álló rendelők.",
         add: "Új rendelő",
         name: "Név",
         status: "Állapot",
@@ -637,13 +637,17 @@ export const hu = {
         userEnable: "Engedélyezés",
         disabled: "Letiltva",
         passwordShort: "A jelszó legalább 10 karakter legyen.",
-        interest: "Partner jelentkezők",
-        interestHint: "A Partnereknek oldal űrlapjáról. A rendelőket felvétel után a rendelők közt szerkesztheted.",
-        interestType: "Típus",
-        interestContact: "Kapcsolat",
-        interestPlace: "Hely",
-        interestAdd: "Felvétel",
-        interestOpen: "Megnyitás",
+      },
+      partners: {
+        title: "Partnerek",
+        sub: "A Partnereknek oldal űrlapjáról jelentkezők: rendelők és más partnerek. Egy rendelőt a Felvétel gombbal tehetsz át a Rendelők közé.",
+        date: "Beérkezett",
+        type: "Típus",
+        name: "Név",
+        place: "Hely",
+        contact: "Kapcsolat",
+        add: "Felvétel",
+        open: "Megnyitás",
       },
       waitlist: {
         title: "Várólista",

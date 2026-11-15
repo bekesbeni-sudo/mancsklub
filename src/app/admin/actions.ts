@@ -287,5 +287,5 @@ export async function startMembership(ownerId: string, petId: string, _: ActionS
 export async function addClinicFromInterest(interestId: string): Promise<void> {
   const { actor } = await requireAdmin();
   const clinicId = await clinicFromInterest(await getDb(), interestId, actor);
-  redirect(clinicId ? `/admin/rendelok/${clinicId}` : "/admin/rendelok");
+  redirect(clinicId ? `/admin/rendelok/${clinicId}` : "/admin/partnerek");
 }
