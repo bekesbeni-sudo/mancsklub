@@ -22,6 +22,8 @@ export const hu = {
       instagram: `${site.name} az Instagramon`,
       facebook: `${site.name} a Facebookon`,
       tiktok: `${site.name} a TikTokon`,
+      menuOpen: "Menü megnyitása",
+      menuClose: "Menü bezárása",
     },
     page: {
       hero: {

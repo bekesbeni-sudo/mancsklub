@@ -10,6 +10,7 @@ export function LandingHero() {
   const n = t.landing.nav;
   const h = t.landing.page.hero;
   const [dark, setDark] = useState(true);
+  const [menu, setMenu] = useState(false);
   const stage = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
 
@@ -46,24 +47,35 @@ export function LandingHero() {
     };
   }, []);
 
+  const close = () => setMenu(false);
+  const links = (
+    <>
+      <a href="#mi-ez" onClick={close}>{n.what}</a>
+      <a href="#hogyan" onClick={close}>{n.how}</a>
+      <a href="#arazas" onClick={close}>{n.price}</a>
+      <a href="#rolunk" onClick={close}>{n.about}</a>
+      <a href="#gyik" onClick={close}>{n.faq}</a>
+      <a href="/partnereknek">{t.footer.partners}</a>
+    </>
+  );
+
   return (
     <>
-      <header className={`lh-gh${dark ? " lh-dark" : ""}`}>
+      <header className={`lh-gh${dark && !menu ? " lh-dark" : ""}${menu ? " lh-open" : ""}`}>
         <nav className="lh-bar" aria-label={n.label}>
           <a href="#top" className="lh-logo-link" aria-label={n.home}>
             <img src={site.logo} alt={site.name} className="lh-logo lh-logo-c" />
             <img src={site.logoWhite} alt="" aria-hidden="true" className="lh-logo lh-logo-w" />
           </a>
-          <div className="lh-links">
-            <a href="#mi-ez">{n.what}</a>
-            <a href="#hogyan">{n.how}</a>
-            <a href="#arazas">{n.price}</a>
-            <a href="#rolunk">{n.about}</a>
-            <a href="#gyik">{n.faq}</a>
-            <a href="/partnereknek">{t.footer.partners}</a>
+          <div className="lh-links">{links}</div>
+          <div className="lh-right">
+            <a href="#feliratkozas" className="lh-glass-btn lh-btn-sm" onClick={close}>{t.landing.cta}</a>
+            <button type="button" className="lh-burger" aria-expanded={menu} aria-controls="lh-menu" aria-label={menu ? n.menuClose : n.menuOpen} onClick={() => setMenu((open) => !open)}>
+              <span /><span /><span />
+            </button>
           </div>
-          <a href="#feliratkozas" className="lh-glass-btn lh-btn-sm">{t.landing.cta}</a>
         </nav>
+        <div id="lh-menu" className="lh-menu" hidden={!menu}>{links}</div>
       </header>
       <section id="top" className="lh-hero">
         <div className="lh-stage" ref={stage}>
