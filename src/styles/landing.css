@@ -726,4 +726,5 @@
   .pw .pz-name{font-size:32px}
   .pw .pz-top{align-items:flex-start}
 }
+.pw #mi-ez [data-rv="cmp"]{margin-top:0!important}
 }
