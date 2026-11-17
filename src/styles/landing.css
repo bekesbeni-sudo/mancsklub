@@ -642,19 +642,17 @@
   .pw .lh-bar{height:44px;padding:0 5px 0 14px}
   .pw .lh-logo{height:21px}
   .pw .lh-btn-sm{height:34px;padding:0 14px;font-size:13.5px}
-  .pw .lh-stage{height:auto;min-height:0;display:block;background:transparent}
-  .pw .lh-still{position:relative;inset:auto;aspect-ratio:4/3;background-position:45% 50%}
-  .pw .lh-vid{height:auto;aspect-ratio:4/3;object-position:45% 50%}
-  .pw .lh-shade{display:none}
-  .pw .lh-copy{padding:26px 20px 8px;color:#1A130F}
-  .pw .lh-kick{color:#A68563}
-  .pw .lh-h1{color:#1A130F;font-size:38px}
-  .pw .lh-sub{color:#6B5747;font-size:17px}
-  .pw .lh-sub strong{color:#2E1F16}
-  .pw .lh-btn-lg{width:100%;background:rgba(46,31,22,.88);border-color:rgba(255,255,255,.18);box-shadow:0 8px 22px rgba(30,22,16,.2),inset 0 1px 0 rgba(255,255,255,.18)}
-  .pw .lh-btn-lg:hover{background:rgba(46,31,22,.96)}
-  .pw .lh-link{color:#2E1F16;border-color:#CBB197}
-  .pw .lh-link:hover{color:#2E1F16}
+  /* On phones the video fills the screen too, with the text over its darkened lower part. */
+  .pw .lh-stage{height:100vh;height:100svh;min-height:560px;max-height:900px;align-items:flex-end}
+  .pw .lh-vid{object-position:62% 50%}
+  .pw .lh-still{background-position:62% 50%}
+  .pw .lh-shade{background:linear-gradient(0deg,rgba(10,12,14,.86) 0%,rgba(10,12,14,.62) 38%,rgba(10,12,14,.12) 62%,rgba(10,12,14,0) 75%),linear-gradient(180deg,rgba(10,12,14,.35) 0%,rgba(10,12,14,0) 18%)}
+  .pw .lh-copy{padding:0 20px 34px}
+  .pw .lh-kick{font-size:12.5px}
+  .pw .lh-h1{font-size:38px;margin-top:12px}
+  .pw .lh-sub{font-size:16.5px;margin-top:14px}
+  .pw .lh-cta{gap:14px;margin-top:24px}
+  .pw .lh-btn-lg{width:100%}
 }
 
 /* Phone polish (2026-11-17): menu, anchors under the sticky header, readable small text, tap sizes. */
