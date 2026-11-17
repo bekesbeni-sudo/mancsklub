@@ -197,9 +197,6 @@ export function LandingView({ v }: { v: LandingModel }) {
                   <Fragment key={cIndex}>
                     <div className="cx-k cx-c1" style={{ gridRow: c.row }}>
                       <span className="cx-mono">
-                        <i>
-                          {c.n}
-                        </i>
                         {c.k}
                       </span>
                     </div>
@@ -424,11 +421,7 @@ export function LandingView({ v }: { v: LandingModel }) {
                   {m.pricing.tervezettCsomagok}
                 </h2>
                 {" "}
-                <p style={{ margin: "0", fontSize: "16px", color: "#5C4A3A" }}>
-                  {m.pricing.mindenBenneVanAmire}
-                </p>
-                {" "}
-                <p style={{ margin: "10px 0 0", fontSize: "15px", color: "#6B5747" }}>
+                <p style={{ margin: "0", fontSize: "15px", color: "#6B5747" }}>
                   {m.pricing.evesTagsagKedvencenkentHavi}
                 </p>
               </div>

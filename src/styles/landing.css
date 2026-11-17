@@ -651,8 +651,9 @@
   .pw .lh-kick{font-size:12.5px}
   .pw .lh-h1{font-size:38px;margin-top:12px}
   .pw .lh-sub{font-size:16.5px;margin-top:14px}
-  .pw .lh-cta{gap:14px;margin-top:24px}
+  .pw .lh-cta{gap:14px;margin-top:24px;justify-content:center}
   .pw .lh-btn-lg{width:100%}
+  .pw .lh-sub{display:none}
 }
 
 /* Phone polish (2026-11-17): menu, anchors under the sticky header, readable small text, tap sizes. */
