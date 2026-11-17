@@ -6,13 +6,27 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/config/site";
 import { t } from "@/messages";
 
+const PHONE = "(max-width:760px)";
+const DESKTOP_VIDEO = "/landing/hero/hero-dog.mp4";
+const PHONE_VIDEO = "/landing/hero/hero-phone.mp4";
+
 export function LandingHero() {
   const n = t.landing.nav;
   const h = t.landing.page.hero;
   const [dark, setDark] = useState(true);
   const [menu, setMenu] = useState(false);
+  // Phones get their own upright video. Chosen after load, so each device downloads only its own file.
+  const [src, setSrc] = useState<string | null>(null);
   const stage = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const phone = window.matchMedia(PHONE);
+    const pick = () => setSrc(phone.matches ? PHONE_VIDEO : DESKTOP_VIDEO);
+    pick();
+    phone.addEventListener("change", pick);
+    return () => phone.removeEventListener("change", pick);
+  }, []);
 
   useEffect(() => {
     const v = video.current;
@@ -43,7 +57,7 @@ export function LandingHero() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [src]);
 
   const close = () => setMenu(false);
   const links = (
@@ -78,9 +92,9 @@ export function LandingHero() {
       <section id="top" className="lh-hero">
         <div className="lh-stage" ref={stage}>
           <div className="lh-still" aria-hidden="true" />
-          <video ref={video} className="lh-vid" poster="/landing/hero/hero-poster.jpg" autoPlay muted loop playsInline preload="auto" aria-hidden="true">
-            <source src="/landing/hero/hero-dog.mp4" type="video/mp4" />
-          </video>
+          {src && (
+            <video key={src} ref={video} className="lh-vid" src={src} poster={src === DESKTOP_VIDEO ? "/landing/hero/hero-poster.jpg" : undefined} autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
+          )}
           <div className="lh-shade" />
           <div className="lh-copy">
             <p className="lh-kick">{h.kicker}</p>

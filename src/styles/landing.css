@@ -644,8 +644,8 @@
   .pw .lh-btn-sm{height:34px;padding:0 14px;font-size:13.5px}
   /* On phones the video fills the screen too, with the text over its darkened lower part. */
   .pw .lh-stage{height:100vh;height:100svh;min-height:560px;max-height:900px;align-items:flex-end}
-  .pw .lh-vid{object-position:62% 50%}
-  .pw .lh-still{background-position:62% 50%}
+  .pw .lh-vid{object-position:50% 50%}
+  .pw .lh-still{display:none}
   .pw .lh-shade{background:linear-gradient(0deg,rgba(10,12,14,.86) 0%,rgba(10,12,14,.62) 38%,rgba(10,12,14,.12) 62%,rgba(10,12,14,0) 75%),linear-gradient(180deg,rgba(10,12,14,.35) 0%,rgba(10,12,14,0) 18%)}
   .pw .lh-copy{padding:0 20px 34px}
   .pw .lh-kick{font-size:12.5px}
