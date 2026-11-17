@@ -13,35 +13,6 @@ const m = t.landing.page;
 export function LandingView({ v }: { v: LandingModel }) {
   return (
     <div className={`pw lp ${v.rootCls}`} onPointerMove={v.onMove} style={{ "--hf": v.hf.family, "--hw": v.hf.weight, "--hls": v.hf.ls, "--accent": v.accent, "--hl": "#CBB197", fontFamily: "var(--nf-body), system-ui, sans-serif", color: "#2E1F16", background: v.theme.bg, overflowX: "clip", transition: "background-color .5s", fontSize: "17px", lineHeight: "1.6" }}>
-      <div aria-hidden="true" style={{ position: "fixed", inset: "0", pointerEvents: "none", zIndex: "80", overflow: "hidden" }}>
-        {v.trail.map((t, tIndex) => (
-          <Fragment key={tIndex}>
-            {t.a && (
-              <>
-                <svg className="paw-step" viewBox="0 0 24 24" fill="#2E1F16" style={{ left: t.x, top: t.y, "--rot": t.r }}>
-                  <ellipse cx="5.6" cy="10.2" rx="2.1" ry="2.7" />
-                  <ellipse cx="9.8" cy="5.6" rx="2.1" ry="2.8" />
-                  <ellipse cx="14.4" cy="5.6" rx="2.1" ry="2.8" />
-                  <ellipse cx="18.6" cy="10.2" rx="2.1" ry="2.7" />
-                  <path d="M12.1 11.4c-3 0-6.1 3.7-6.1 6.3 0 1.8 1.4 2.8 3 2.8 1.2 0 2.1-.6 3.1-.6s1.9.6 3.1.6c1.6 0 3-1 3-2.8 0-2.6-3.1-6.3-6.1-6.3z" />
-                </svg>
-              </>
-            )}
-            {t.b && (
-              <>
-                <svg className="paw-step" viewBox="0 0 24 24" fill="#2E1F16" style={{ left: t.x, top: t.y, "--rot": t.r }}>
-                  <ellipse cx="5.6" cy="10.2" rx="2.1" ry="2.7" />
-                  <ellipse cx="9.8" cy="5.6" rx="2.1" ry="2.8" />
-                  <ellipse cx="14.4" cy="5.6" rx="2.1" ry="2.8" />
-                  <ellipse cx="18.6" cy="10.2" rx="2.1" ry="2.7" />
-                  <path d="M12.1 11.4c-3 0-6.1 3.7-6.1 6.3 0 1.8 1.4 2.8 3 2.8 1.2 0 2.1-.6 3.1-.6s1.9.6 3.1.6c1.6 0 3-1 3-2.8 0-2.6-3.1-6.3-6.1-6.3z" />
-                </svg>
-              </>
-            )}
-          </Fragment>
-        ))}
-      </div>
-      {" "}
       <div aria-hidden="true" style={{ position: "fixed", inset: "0", pointerEvents: "none", zIndex: "90", overflow: "hidden" }}>
         {v.burstA && (
           <>

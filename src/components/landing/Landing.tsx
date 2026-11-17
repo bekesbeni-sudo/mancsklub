@@ -12,7 +12,6 @@ type Species = "dog" | "cat";
 type Pet = "none" | Species | "both";
 type PlanCode = keyof typeof t.landing.plans;
 type Interest = "unsure" | PlanCode;
-type PawStep = { g: number; x: string; y: string; r: string };
 type Particle = {
   x: string; y: string; dx: string; dy: string; rot: string; delay: string; size: string; color: string;
   isPaw: boolean; isHeart: boolean; isImg: boolean; i0: boolean; i1: boolean; i2: boolean; i3: boolean; i4: boolean;
@@ -32,7 +31,6 @@ const PLAN_STYLE: Record<PlanCode, { dog: string; cat: string; avBg: string; glo
 const CONFETTI_COLORS = ["#A68563", "#7E9B7A", "#F27B8C", "#CBB197", "#C5D4BF", INK, "#7D572E"];
 const HEADING = { family: "var(--nf-display), var(--nf-body), system-ui, sans-serif", weight: 700, ls: "-0.03em" };
 const REVEAL = ["why", "cmp", "s1", "s2", "s3", "price", "join", "team", "faq", "cta"] as const;
-const EMPTY_TRAIL: PawStep[] = Array.from({ length: 18 }, () => ({ g: 0, x: "0px", y: "0px", r: "0deg" }));
 
 const validEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
 const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
@@ -81,7 +79,6 @@ function confetti(x: number, y: number): Particle[] {
 
 function useLandingModel() {
   const l = t.landing;
-  const [trail, setTrail] = useState(EMPTY_TRAIL);
   const [pet, setPet] = useState<Pet>("none");
   const [petName, setPetName] = useState("");
   const [email, setEmail] = useState("");
@@ -109,7 +106,6 @@ function useLandingModel() {
   const [fetchN, setFetchN] = useState(0);
 
   const lastPoint = useRef<{ x: number; y: number } | null>(null);
-  const paw = useRef<{ last: { x: number; y: number } | null; side: number; slot: number }>({ last: null, side: 1, slot: 0 });
   const raf = useRef<number | null>(null);
   const sending = useRef(false);
   const signupToken = useRef<string | null>(null);
@@ -474,7 +470,6 @@ function useLandingModel() {
     theme: { bg: "#FBF7F2", bg2: "#E6D4C2", hdr: "rgba(251, 247, 242, 0.92)", blob: "#E6D4C2" },
     rootCls: armed && motion ? "armed" : "",
     rv,
-    trail: trail.map((step) => ({ a: step.g > 0 && step.g % 2 === 1, b: step.g > 0 && step.g % 2 === 0, x: step.x, y: step.y, r: step.r })),
     stat500: Math.round(600 * countProgress),
     stat53: Math.round(400 * countProgress),
     kxCls: cardGo || count !== null || !countArmed || !motion ? "go" : "",
@@ -601,37 +596,6 @@ function useLandingModel() {
           el.style.setProperty("--py", y.toFixed(3));
         });
       }
-      if (event.pointerType === "touch" || reducedMotion()) return;
-      const state = paw.current;
-      const hero = document.getElementById("top")?.getBoundingClientRect();
-      if (hero && (cy < hero.top || cy > hero.bottom)) {
-        state.last = null;
-        return;
-      }
-      if (!state.last) {
-        state.last = { x: cx, y: cy };
-        return;
-      }
-      const dx = cx - state.last.x;
-      const dy = cy - state.last.y;
-      if (Math.hypot(dx, dy) < 48) return;
-      state.last = { x: cx, y: cy };
-      const angle = Math.atan2(dy, dx);
-      state.side *= -1;
-      state.slot = (state.slot + 1) % EMPTY_TRAIL.length;
-      const { slot, side } = state;
-      setTrail((current) =>
-        current.map((step, i) =>
-          i === slot
-            ? {
-                g: step.g + 1,
-                x: `${(cx - Math.sin(angle) * 10 * side).toFixed(0)}px`,
-                y: `${(cy + Math.cos(angle) * 10 * side).toFixed(0)}px`,
-                r: `${((angle * 180) / Math.PI + 90).toFixed(0)}deg`,
-              }
-            : step,
-        ),
-      );
     },
   };
 }
