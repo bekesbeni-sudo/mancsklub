@@ -2,6 +2,8 @@
 export const site = {
   name: "mancsklub",
   logo: "/landing/logo.webp",
+  // White version for dark backgrounds, such as the video at the top of the landing page.
+  logoWhite: "/landing/logo-white.png",
   wordmark: ["mancs", "klub"],
   domain: "mancsklub.hu",
   contactEmail: "info@mancsklub.hu",

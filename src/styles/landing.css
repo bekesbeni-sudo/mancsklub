@@ -323,7 +323,7 @@
 .pw .cx-ck{flex:none;width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,#97B092,#5E7F5A);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(126,155,122,.14),0 6px 14px -6px rgba(94,127,90,.9)}
 .pw .cx-k:hover~.cx-old{}
 .pw .cx-m{display:none}
-@media (max-width:640px){.pw #top{padding-top:60px!important}
+@media (max-width:640px){.pw #top.hx{padding-top:60px!important}
 .pw .hx.hx2{padding-bottom:52px!important}
 .pw .hx-stage{margin-top:36px!important}
 .pw .hx-bar{padding:11px 16px}
@@ -600,4 +600,60 @@
 /* Signup success box: on phones the tick goes above the text, so the confirm note gets the full width. */
 .pw .join-ok{padding:24px 26px;gap:18px}
 @media (max-width:560px){.pw .join-ok{flex-direction:column;padding:20px 18px;gap:12px}}
+
+/* Glass header and video hero (mancsklub-frontpage, 2026-11-17). See LandingHero.tsx. */
+.pw .lh-gh{position:sticky;top:0;z-index:60;height:64px;margin-bottom:-64px;padding:10px 20px 0;box-sizing:border-box;pointer-events:none}
+.pw .lh-bar{pointer-events:auto;max-width:1080px;margin:0 auto;height:48px;padding:0 6px 0 18px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:20px;border-radius:999px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);border:1px solid rgba(46,31,22,.08);box-shadow:0 10px 30px rgba(30,22,16,.10),inset 0 1px 0 rgba(255,255,255,.7);transition:background .35s,border-color .35s,box-shadow .35s}
+.pw .lh-logo-link{display:flex;align-items:center;text-decoration:none}
+.pw .lh-logo{display:block;height:23px;width:auto}
+.pw .lh-logo-w{display:none}
+.pw .lh-links{display:flex;align-items:center;gap:2px;font-size:14px;font-weight:600;line-height:1.2;color:#4F3D2E;transition:color .35s}
+.pw .lh-links a{color:inherit;text-decoration:none;padding:7px 13px;border-radius:999px;border:1px solid transparent;transition:background .25s,border-color .25s,box-shadow .25s,color .25s}
+.pw .lh-links a:hover{background:rgba(255,255,255,.55);border-color:rgba(46,31,22,.08);box-shadow:0 4px 14px rgba(30,22,16,.08),inset 0 1px 0 rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#1A130F}
+.pw .lh-glass-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:700;text-decoration:none;white-space:nowrap;-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);transition:background .3s,border-color .3s,color .3s,box-shadow .3s,transform .2s}
+.pw .lh-glass-btn:hover{transform:translateY(-1px)}
+.pw .lh-btn-sm{height:36px;padding:0 17px;font-size:14px;background:rgba(46,31,22,.86);color:#fff;border:1px solid rgba(255,255,255,.18);box-shadow:0 6px 18px rgba(30,22,16,.18),inset 0 1px 0 rgba(255,255,255,.18)}
+.pw .lh-btn-sm:hover{background:rgba(46,31,22,.95);color:#fff}
+.pw .lh-gh.lh-dark .lh-bar{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22);box-shadow:0 10px 34px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.22)}
+.pw .lh-gh.lh-dark .lh-logo-c{display:none}
+.pw .lh-gh.lh-dark .lh-logo-w{display:block}
+.pw .lh-gh.lh-dark .lh-links{color:rgba(255,255,255,.92)}
+.pw .lh-gh.lh-dark .lh-links a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.28);box-shadow:0 4px 16px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.3);color:#fff}
+.pw .lh-gh.lh-dark .lh-btn-sm{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.38);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35)}
+.pw .lh-gh.lh-dark .lh-btn-sm:hover{background:rgba(255,255,255,.26)}
+.pw .lh-hero{position:relative}
+.pw .lh-stage{position:relative;height:min(56.25vw,100vh);min-height:620px;overflow:hidden;background:#15181A;display:flex;align-items:center}
+.pw .lh-still{position:absolute;inset:0;background:url(/landing/hero/hero-poster.jpg) 50% 50%/cover no-repeat}
+.pw .lh-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.pw .lh-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(10,12,14,.62) 0%,rgba(10,12,14,.38) 30%,rgba(10,12,14,0) 52%),linear-gradient(0deg,rgba(10,12,14,.35) 0%,rgba(10,12,14,0) 30%)}
+.pw .lh-copy{position:relative;z-index:1;width:100%;max-width:1240px;margin:0 auto;padding:64px 48px 0;box-sizing:border-box;color:#fff}
+.pw .lh-kick{margin:0;font-size:14px;font-weight:600;color:rgba(255,255,255,.72);letter-spacing:.02em;text-transform:uppercase}
+.pw .lh-h1{margin:16px 0 0;font-family:var(--nf-display),var(--nf-body),system-ui,sans-serif;font-weight:700;letter-spacing:-0.035em;font-size:clamp(38px,3.9vw,58px);line-height:1.05;color:#fff;max-width:11.5em}
+.pw .lh-sub{margin:20px 0 0;max-width:24em;font-size:18px;line-height:1.5;color:rgba(255,255,255,.82)}
+.pw .lh-sub strong{font-weight:700;color:#fff}
+.pw .lh-cta{display:flex;flex-wrap:wrap;gap:24px;align-items:center;margin-top:32px}
+.pw .lh-btn-lg{height:54px;padding:0 30px;font-size:15px;background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.42);box-shadow:0 10px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.4)}
+.pw .lh-btn-lg:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6);color:#fff}
+.pw .lh-link{font-weight:600;font-size:15px;color:#fff;text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.45);padding-bottom:2px}
+.pw .lh-link:hover{border-color:#fff;color:#fff}
+@media (max-width:860px){.pw .lh-links{display:none}}
+@media (max-width:760px){
+  .pw .lh-gh{height:60px;margin-bottom:-60px;padding:8px 12px 0}
+  .pw .lh-bar{height:44px;padding:0 5px 0 14px}
+  .pw .lh-logo{height:21px}
+  .pw .lh-btn-sm{height:34px;padding:0 14px;font-size:13.5px}
+  .pw .lh-stage{height:auto;min-height:0;display:block;background:transparent}
+  .pw .lh-still{position:relative;inset:auto;aspect-ratio:4/3;background-position:45% 50%}
+  .pw .lh-vid{height:auto;aspect-ratio:4/3;object-position:45% 50%}
+  .pw .lh-shade{display:none}
+  .pw .lh-copy{padding:26px 20px 8px;color:#1A130F}
+  .pw .lh-kick{color:#A68563}
+  .pw .lh-h1{color:#1A130F;font-size:38px}
+  .pw .lh-sub{color:#6B5747;font-size:17px}
+  .pw .lh-sub strong{color:#2E1F16}
+  .pw .lh-btn-lg{width:100%;background:rgba(46,31,22,.88);border-color:rgba(255,255,255,.18);box-shadow:0 8px 22px rgba(30,22,16,.2),inset 0 1px 0 rgba(255,255,255,.18)}
+  .pw .lh-btn-lg:hover{background:rgba(46,31,22,.96)}
+  .pw .lh-link{color:#2E1F16;border-color:#CBB197}
+  .pw .lh-link:hover{color:#2E1F16}
+}
 }

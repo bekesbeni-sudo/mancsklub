@@ -27,6 +27,9 @@ export const hu = {
       hero: {
         varolistaNyitva: "VÁRÓLISTA NYITVA",
         hamarosanEgeszMagyarorszagon: "Hamarosan egész Magyarországon!",
+        kicker: "Hamarosan egész Magyarországon",
+        ctaWaitlist: "Feliratkozom a várólistára",
+        ctaPlans: "Csomagok megtekintése",
         kedvenced: "Kedvenced",
         egeszsege: "egészsége.",
         eloreMegtervezve: "Előre megtervezve.",
