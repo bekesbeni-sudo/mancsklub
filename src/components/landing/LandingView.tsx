@@ -437,7 +437,7 @@ export function LandingView({ v }: { v: LandingModel }) {
               </div>
             </div>
             {" "}
-            <div data-rv="price" className={`rv ${v.rv.price}`}>
+            <div data-rv="price" className={`rv ${v.rv.price} pz-layout`}>
               <div className="pz-head">
                 <p>
                   {m.pricing.valasszCsomagot}
@@ -471,6 +471,9 @@ export function LandingView({ v }: { v: LandingModel }) {
                                 </span>
                               </>
                             )}
+                            <svg className="pz-chev" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 6l6 6-6 6" />
+                            </svg>
                             <span className="ok" aria-hidden="true">
                               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A130F" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12l5 5L20 7" />
