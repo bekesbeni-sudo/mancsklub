@@ -25,7 +25,7 @@ export function LandingHero() {
     };
     // The header is see-through with white text over the video, frosted with dark text below it.
     const onScroll = () => {
-      if (stage.current) setDark(stage.current.getBoundingClientRect().bottom > 70);
+      if (stage.current) setDark(stage.current.getBoundingClientRect().bottom > 90);
     };
     kick();
     const timers = [setTimeout(kick, 500), setTimeout(kick, 2000)];

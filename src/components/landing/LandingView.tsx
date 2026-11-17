@@ -262,7 +262,7 @@ export function LandingView({ v }: { v: LandingModel }) {
             {" "}
             <div className="steps" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "18px" }}>
               <div data-rv="s1" className={`rv ${v.rv.s1}`}>
-                <div className="lift" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
+                <div className="lift glass glass-edge" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
                   <div aria-hidden="true" style={{ height: "190px", borderRadius: "22px", background: "#F4EBE2", marginBottom: "22px", boxSizing: "border-box", padding: "0 18px", display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", alignContent: "center", gap: "8px" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "42px", borderRadius: "12px", background: "#FFFFFF", fontSize: "13.5px", fontWeight: "700", whiteSpace: "nowrap" }}>
                       {m.how.kolyok}
@@ -307,7 +307,7 @@ export function LandingView({ v }: { v: LandingModel }) {
               </div>
               {" "}
               <div data-rv="s2" className={`rv ${v.rv.s2}`} style={{ transitionDelay: "100ms" }}>
-                <div className="lift" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
+                <div className="lift glass glass-edge" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
                   <div aria-hidden="true" style={{ height: "190px", borderRadius: "22px", background: "#E3EBDD", marginBottom: "22px", position: "relative", overflow: "hidden" }}>
                     <svg viewBox="0 0 300 190" preserveAspectRatio="none" style={{ position: "absolute", inset: "0", width: "100%", height: "100%" }}>
                       <path d="M150 -10C138 40 166 80 156 120C148 152 134 170 142 200" fill="none" stroke="#C9D8C2" strokeWidth="22" strokeLinecap="round" />
@@ -348,7 +348,7 @@ export function LandingView({ v }: { v: LandingModel }) {
               </div>
               {" "}
               <div data-rv="s3" className={`rv ${v.rv.s3}`} style={{ transitionDelay: "200ms" }}>
-                <div className="lift" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
+                <div className="lift glass glass-edge" style={{ height: "100%", borderRadius: "30px", padding: "24px", background: "#FFFFFF", border: "1.5px solid #DCC9B3" }}>
                   <div aria-hidden="true" style={{ height: "190px", borderRadius: "22px", background: "#F4EBE2", marginBottom: "22px", display: "flex", alignItems: "center", justifyContent: "center", gap: "18px" }}>
                     <div style={{ position: "relative", width: "100px", height: "100px", borderRadius: "16px", background: "#FFFFFF", padding: "10px", boxShadow: "0 10px 24px rgba(46, 31, 22, 0.08)" }}>
                       <svg width="80" height="80" viewBox="0 0 8 8" shapeRendering="crispEdges">
@@ -652,7 +652,7 @@ export function LandingView({ v }: { v: LandingModel }) {
           {" "}
           <span id="feliratkozas" aria-hidden="true" style={{ position: "absolute", left: "0", top: "-64px", width: "1px", height: "1px", scrollMarginTop: "0" }} />
           {" "}
-          <div data-rv="join" className={`rv ${v.rv.join}`} style={{ maxWidth: "1120px", margin: "0 auto", display: "flex", flexWrap: "wrap", borderRadius: "32px", overflow: "hidden", background: "#FFFFFF", border: "1px solid #E6D9CB", boxShadow: "0 1px 2px rgba(46, 31, 22, 0.04), 0 30px 60px -30px rgba(46, 31, 22, 0.22)" }}>
+          <div data-rv="join" className={`rv ${v.rv.join} glass glass-edge`} style={{ maxWidth: "1120px", margin: "0 auto", display: "flex", flexWrap: "wrap", borderRadius: "32px", overflow: "hidden", background: "#FFFFFF", border: "1px solid #E6D9CB", boxShadow: "0 1px 2px rgba(46, 31, 22, 0.04), 0 30px 60px -30px rgba(46, 31, 22, 0.22)" }}>
             <div className="jp jp-l" style={{ position: "relative", flex: "1 1 380px", minWidth: "0", padding: "36px 40px 0", background: "#F3EBE2", display: "flex", flexDirection: "column", overflow: "hidden" }}>
               <div aria-hidden="true" style={{ position: "absolute", inset: "0", pointerEvents: "none", backgroundImage: "radial-gradient(rgba(46, 31, 22, 0.10) 1px, transparent 1.5px)", backgroundSize: "22px 22px", WebkitMaskImage: "linear-gradient(to bottom, transparent, #000 60%)", maskImage: "linear-gradient(to bottom, transparent, #000 60%)" }} />
               {" "}
@@ -970,7 +970,7 @@ export function LandingView({ v }: { v: LandingModel }) {
             </div>
             {" "}
             <div data-rv="team" className={`rv ${v.rv.team}`} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "18px" }}>
-              <div className="lift" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
+              <div className="lift glass glass-edge" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
                 <img src={"/landing/team-benjamin.webp"} alt={m.team.bekesBenjamin} style={{ display: "block", width: "128px", height: "128px", margin: "0 auto 20px", borderRadius: "50%", objectFit: "cover", boxShadow: "0 0 0 4px #FFFFFF, 0 0 0 5px #E6D4C2" }} />
                 {" "}
                 <h3 className="h" style={{ margin: "0 0 4px", fontSize: "24px" }}>
@@ -982,7 +982,7 @@ export function LandingView({ v }: { v: LandingModel }) {
                 </p>
               </div>
               {" "}
-              <div className="lift" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
+              <div className="lift glass glass-edge" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
                 <img src={"/landing/team-david.webp"} alt={m.team.bihariDavid} style={{ display: "block", width: "128px", height: "128px", margin: "0 auto 20px", borderRadius: "50%", objectFit: "cover", boxShadow: "0 0 0 4px #FFFFFF, 0 0 0 5px #E6D4C2" }} />
                 {" "}
                 <h3 className="h" style={{ margin: "0 0 4px", fontSize: "24px" }}>
@@ -994,7 +994,7 @@ export function LandingView({ v }: { v: LandingModel }) {
                 </p>
               </div>
               {" "}
-              <div className="lift" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
+              <div className="lift glass glass-edge" style={{ borderRadius: "30px", padding: "34px 28px 30px", background: "#FFFFFF", border: "1.5px solid #DCC9B3", textAlign: "center" }}>
                 <img src={"/landing/team-abel.webp"} alt={m.team.ilkovitsAbelEsNozi} style={{ display: "block", width: "128px", height: "128px", margin: "0 auto 20px", borderRadius: "50%", objectFit: "cover", objectPosition: "50% 50%", boxShadow: "0 0 0 4px #FFFFFF, 0 0 0 5px #E6D4C2" }} />
                 {" "}
                 <h3 className="h" style={{ margin: "0 0 4px", fontSize: "24px" }}>
@@ -1040,7 +1040,7 @@ export function LandingView({ v }: { v: LandingModel }) {
             <div data-rv="faq" className={`rv ${v.rv.faq}`} style={{ flex: "2 1 560px", minWidth: "0", display: "flex", flexDirection: "column", gap: "10px" }}>
               {v.faqs.map((f, fIndex) => (
                 <Fragment key={fIndex}>
-                  <div style={{ borderRadius: "22px", padding: "0 24px", background: "#FFFFFF", border: `1.5px solid ${f.border}` }}>
+                  <div className="glass" style={{ borderRadius: "22px", padding: "0 24px", background: "#FFFFFF", border: `1.5px solid ${f.border}` }}>
                     <h3 style={{ margin: "0" }}>
                       <button type="button" onClick={f.toggle} aria-expanded={f.open} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "20px", padding: "20px 0", background: "none", border: "0", cursor: "pointer", textAlign: "left", fontFamily: "inherit", fontSize: "18px", fontWeight: "700", color: "#2E1F16" }}>
                         {f.q}
