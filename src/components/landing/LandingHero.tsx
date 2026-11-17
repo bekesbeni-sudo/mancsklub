@@ -59,7 +59,7 @@ export function LandingHero() {
 
   return (
     <>
-      <header className={`lh-gh${dark && !menu ? " lh-dark" : ""}${menu ? " lh-open" : ""}`}>
+      <header className={`lh-gh${dark ? " lh-dark" : ""}${menu ? " lh-open" : ""}`}>
         <nav className="lh-bar" aria-label={n.label}>
           <a href="#top" className="lh-logo-link" aria-label={n.home}>
             <img src={site.logo} alt={site.name} className="lh-logo lh-logo-c" />
