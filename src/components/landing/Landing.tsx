@@ -84,7 +84,7 @@ function useLandingModel() {
   const [email, setEmail] = useState("");
   const [priceSpecies, setPriceSpecies] = useState<Species>("dog");
   const [interest, setInterest] = useState<Interest>("unsure");
-  const [faq, setFaq] = useState(0);
+  const [faq, setFaq] = useState(-1);
   const [plan, setPlan] = useState<PlanCode>("PLUSZ");
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState<string | null>(null);

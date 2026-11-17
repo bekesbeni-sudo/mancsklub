@@ -1002,24 +1002,24 @@ export function LandingView({ v }: { v: LandingModel }) {
           </div>
         </section>
         {" "}
-        <section id="gyik" className="sx sx-r sx-sand" style={{ padding: "100px 24px", background: v.theme.bg2 }}>
+        <section id="gyik" className="sx sx-r sx-sand" style={{ padding: "64px 24px", background: v.theme.bg2 }}>
           <div className="sx-au" aria-hidden="true">
             <span className="b1" />
             <span className="b2" />
             <span className="b3" />
           </div>
           {" "}
-          <div className="faq-wrap" style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "48px" }}>
+          <div className="faq-wrap" style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "32px 48px" }}>
             <div className="faq-side" style={{ flex: "1 1 300px", minWidth: "0" }}>
-              <p className="eyebrow" style={{ margin: "0 0 16px", color: "#7D572E" }}>
+              <p className="eyebrow" style={{ margin: "0 0 12px", color: "#7D572E" }}>
                 {m.faq.gyik}
               </p>
               {" "}
-              <h2 className="h" style={{ margin: "0 0 16px", fontSize: "clamp(34px, 4.2vw, 54px)", lineHeight: "1.06" }}>
+              <h2 className="h" style={{ margin: "0 0 12px", fontSize: "clamp(30px, 3.4vw, 44px)", lineHeight: "1.06" }}>
                 {m.faq.kerdesedVan}
               </h2>
               {" "}
-              <p style={{ margin: "0 0 24px", color: "#5C4A3A" }}>
+              <p style={{ margin: "0 0 20px", color: "#5C4A3A", fontSize: "16px" }}>
                 {m.faq.nemTalalodAValaszt}{" "}
                 <a href={`mailto:${site.contactEmail}`} style={{ fontWeight: "700", color: "#2E1F16", textDecoration: "underline", textUnderlineOffset: "3px" }}>
                   {site.contactEmail}
@@ -1027,17 +1027,17 @@ export function LandingView({ v }: { v: LandingModel }) {
                 {" "}{m.faq.cimreIgyekszunkMindenLevelre}
               </p>
               {" "}
-              <img className="hide-sm" src={"/landing/bobe.webp"} alt={m.faq.bobe} style={{ width: "210px", height: "auto", transform: "rotate(-6deg)" }} />
+              <img className="hide-sm" src={"/landing/bobe.webp"} alt={m.faq.bobe} style={{ width: "150px", height: "auto", transform: "rotate(-6deg)" }} />
             </div>
             {" "}
-            <div data-rv="faq" className={`rv ${v.rv.faq}`} style={{ flex: "2 1 560px", minWidth: "0", display: "flex", flexDirection: "column", gap: "10px" }}>
+            <div data-rv="faq" className={`rv ${v.rv.faq}`} style={{ flex: "2 1 560px", minWidth: "0", display: "flex", flexDirection: "column", gap: "8px" }}>
               {v.faqs.map((f, fIndex) => (
                 <Fragment key={fIndex}>
-                  <div className="glass" style={{ borderRadius: "22px", padding: "0 24px", background: "#FFFFFF", border: `1.5px solid ${f.border}` }}>
+                  <div className="glass" style={{ borderRadius: "18px", padding: "0 20px", background: "#FFFFFF", border: `1.5px solid ${f.border}` }}>
                     <h3 style={{ margin: "0" }}>
-                      <button type="button" onClick={f.toggle} aria-expanded={f.open} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "20px", padding: "20px 0", background: "none", border: "0", cursor: "pointer", textAlign: "left", fontFamily: "inherit", fontSize: "18px", fontWeight: "700", color: "#2E1F16" }}>
+                      <button type="button" onClick={f.toggle} aria-expanded={f.open} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px", padding: "14px 0", background: "none", border: "0", cursor: "pointer", textAlign: "left", fontFamily: "inherit", fontSize: "16.5px", fontWeight: "700", color: "#2E1F16" }}>
                         {f.q}
-                        <span className="acc-icon" aria-hidden="true" style={{ flex: "none", width: "34px", height: "34px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", transform: `rotate(${f.rot})`, background: f.icon }}>
+                        <span className="acc-icon" aria-hidden="true" style={{ flex: "none", width: "28px", height: "28px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", transform: `rotate(${f.rot})`, background: f.icon }}>
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2E1F16" strokeWidth="3" strokeLinecap="round">
                             <path d="M12 5v14M5 12h14" />
                           </svg>
@@ -1046,7 +1046,7 @@ export function LandingView({ v }: { v: LandingModel }) {
                     </h3>
                     <div className="acc-body" style={{ gridTemplateRows: f.rows }}>
                       <div style={{ overflow: "hidden" }}>
-                        <p style={{ margin: "0 0 22px", fontSize: "16.5px", color: "#5C4A3A", maxWidth: "640px" }}>
+                        <p style={{ margin: "0 0 16px", fontSize: "15.5px", color: "#5C4A3A", maxWidth: "640px" }}>
                           {f.a}
                         </p>
                       </div>
