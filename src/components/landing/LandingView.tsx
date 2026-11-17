@@ -935,14 +935,6 @@ export function LandingView({ v }: { v: LandingModel }) {
                                 <span className="pz-pill" style={{ background: "#F4EBE2", color: "#7D572E" }}>
                                   {p.stage}
                                 </span>
-                                {p.featured && (
-                                  <>
-                                    <span className="pz-pill" style={{ background: "#E3EBDD", color: "#3F5A3C" }}>
-                                      <span className="live-dot" />
-                                      {m.pricing.aGazdikKedvence}
-                                    </span>
-                                  </>
-                                )}
                                 {p.top && (
                                   <>
                                     <span className="pz-pill pz-top-pill">

@@ -226,7 +226,7 @@ export const hu = {
       PLUSZ: {
         name: "Plusz",
         stage: "Felnőtt",
-        sub: "A gazdik kedvence",
+        sub: "Felnőtt",
         desc: "Alapok, betegvizit és labor",
         dogAlt: "Yorkshire terrier",
         catAlt: "Fehér cica",
