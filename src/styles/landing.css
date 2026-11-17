@@ -698,4 +698,9 @@
 .pw #mi-ez{padding-top:64px!important;padding-bottom:40px!important}
 @media (max-width:760px){.pw #mi-ez{padding-top:44px!important;padding-bottom:24px!important}}
 @media (max-width:760px){.pw #gyik{padding:44px 16px 40px!important}}
+
+/* Even section rhythm (2026-11-17): every section below the hero gets the same top and bottom space. */
+.pw main > section:not(#top){padding-top:var(--sec-y)!important;padding-bottom:var(--sec-y)!important}
+.pw main{--sec-y:64px}
+@media (max-width:760px){.pw main{--sec-y:44px}.pw main > section:not(#top){padding-left:20px!important;padding-right:20px!important}}
 }
