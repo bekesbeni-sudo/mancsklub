@@ -426,7 +426,7 @@ export function LandingView({ v }: { v: LandingModel }) {
                 </p>
               </div>
               {" "}
-              <div role="group" aria-label={m.pricing.kedvenc} style={{ display: "inline-flex", padding: "5px", borderRadius: "999px", background: "#F4EBE2", gap: "4px" }}>
+              <div role="group" aria-label={m.pricing.kedvenc} className="pz-species" style={{ display: "inline-flex", padding: "5px", borderRadius: "999px", background: "#F4EBE2", gap: "4px" }}>
                 <button type="button" className="seg" onClick={v.priceDog} aria-pressed={v.pIsDog} style={{ border: "0", background: v.ps.dogBg, color: v.ps.dogFg }}>
                   {m.pricing.kutya}
                 </button>
@@ -440,9 +440,6 @@ export function LandingView({ v }: { v: LandingModel }) {
             <div data-rv="price" className={`rv ${v.rv.price}`}>
               <div className="pz-head">
                 <p>
-                  <span className="pz-step">
-                    {"1"}
-                  </span>
                   {m.pricing.valasszCsomagot}
                 </p>
                 <span>
@@ -459,18 +456,6 @@ export function LandingView({ v }: { v: LandingModel }) {
                       {v.plans.map((c, cIndex) => (
                         <Fragment key={cIndex}>
                           <button type="button" className={`pz-opt ${c.cls}`} onClick={c.select} aria-pressed={c.on}>
-                            <span className="av" style={{ background: c.avBg }}>
-                              {c.isDog && (
-                                <>
-                                  <img src={c.dog} alt="" />
-                                </>
-                              )}
-                              {c.isCat && (
-                                <>
-                                  <img src={c.cat} alt="" />
-                                </>
-                              )}
-                            </span>
                             <span className="tx">
                               <b>
                                 {c.name}
@@ -504,21 +489,6 @@ export function LandingView({ v }: { v: LandingModel }) {
                   {p.on && (
                     <>
                       <div className="pz-panel">
-                        <div className="pz-stage" style={{ "--g": p.glow }}>
-                          <div className="pz-tile">
-                            <div className="pz-shadow" aria-hidden="true" />
-                            {p.isDog && (
-                              <>
-                                <img className="pz-pet" src={p.dog} alt={p.dogAlt} />
-                              </>
-                            )}
-                            {p.isCat && (
-                              <>
-                                <img className="pz-pet" src={p.cat} alt={p.catAlt} />
-                              </>
-                            )}
-                          </div>
-                        </div>
                         <div className="pz-body">
                           <div className="pz-top">
                             <div style={{ minWidth: "0" }}>

@@ -703,4 +703,27 @@
 .pw main > section:not(#top){padding-top:var(--sec-y)!important;padding-bottom:var(--sec-y)!important}
 .pw main{--sec-y:64px}
 @media (max-width:760px){.pw main{--sec-y:44px}.pw main > section:not(#top){padding-left:20px!important;padding-right:20px!important}}
+
+/* Pricing without stickers, in glass (2026-11-17). */
+.pw .pz-species{background:rgba(255,255,255,.5)!important;border:1px solid rgba(255,255,255,.75);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:0 8px 24px -12px rgba(30,22,16,.18),inset 0 1px 0 rgba(255,255,255,.85)}
+.pw .pz-opt{min-height:58px;padding:10px 16px;gap:0;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.7);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.pw .pz-opt.top:not(.on){background:rgba(255,255,255,.42);border-color:rgba(194,154,114,.45)}
+.pw .pz-opt:hover:not(.on){background:rgba(255,255,255,.75);border-color:rgba(255,255,255,.95);box-shadow:0 10px 22px -14px rgba(31,23,18,.35),inset 0 1px 0 rgba(255,255,255,.9)}
+.pw .pz-opt .tx{padding-right:18px}
+.pw .pz-opt b{font-size:15.5px}
+.pw .pz-thumb{background:rgba(26,19,15,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 28px -14px rgba(26,19,15,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+.pw .pz-panel{grid-template-columns:1fr!important}
+.pw .pz-body{gap:22px;padding:30px 34px}
+.pw .pz-top{align-items:center}
+.pw .pz-name{font-size:38px;margin:10px 0 6px}
+.pw .pz-price{padding:14px 20px;border-radius:18px;background:rgba(26,19,15,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 30px -16px rgba(26,19,15,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+.pw .pz-price b{font-size:19px}
+.pw .pz-cols{padding-top:22px;border-top:1px solid rgba(46,31,22,.08)}
+.pw .pz-cta{padding-top:4px}
+@media (max-width:760px){
+  .pw .pz-tabs .pz-opt{min-height:52px;padding:8px 4px}
+  .pw .pz-body{padding:22px 20px;gap:18px}
+  .pw .pz-name{font-size:32px}
+  .pw .pz-top{align-items:flex-start}
+}
 }
