@@ -751,4 +751,9 @@
   .pw .pz-layout>.pz-panel{margin:0}
   .pw .pz-layout .pz-body{padding:32px 36px}
 }
+
+/* Comparison: the dark column sits flush with the card's right edge, no white strip beside it (2026-11-18) */
+.pw .cx{padding-right:0!important}
+.pw .cx-band{margin-right:-1px!important;border-top-right-radius:28px;border-bottom-right-radius:28px}
+@media (max-width:720px){.pw .cx-band{border-top-right-radius:22px;border-bottom-right-radius:22px}}
 }
