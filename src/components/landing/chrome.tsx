@@ -4,29 +4,7 @@ import { site } from "@/config/site";
 import { t } from "@/messages";
 import "@/styles/landing.css";
 
-// Header and footer of the landing page (mancsklub-web, 2026-11-12), shared with the clinic and privacy pages.
-
-export function SiteHeader() {
-  const n = t.landing.nav;
-  return (
-    <header style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(255, 255, 255, 0.88)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(46, 31, 22, 0.08)" }}>
-      <nav aria-label={n.label} style={{ maxWidth: 1220, margin: "0 auto", padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
-        <Link href="/#top" aria-label={n.home} style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-          <img src={site.logo} alt={site.name} style={{ display: "block", height: 30, width: "auto" }} />
-        </Link>
-        <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: 30, fontSize: 15, fontWeight: 600, color: "#4F3D2E" }}>
-          <Link href="/#mi-ez" className="nl">{n.what}</Link>
-          <Link href="/#hogyan" className="nl">{n.how}</Link>
-          <Link href="/#arazas" className="nl">{n.price}</Link>
-          <Link href="/#rolunk" className="nl">{n.about}</Link>
-          <Link href="/#gyik" className="nl">{n.faq}</Link>
-          <Link href="/partnereknek" className="nl nl-partner">{t.footer.partners}</Link>
-        </div>
-        <Link href="/#feliratkozas" className="btn" style={{ minHeight: 44, padding: "0 20px", fontSize: 15, background: "#2E1F16", color: "#FFFFFF" }}>{t.landing.cta}</Link>
-      </nav>
-    </header>
-  );
-}
+// Footer of the landing page (mancsklub-web, 2026-11-12), shared with the partner and privacy pages. The header is LandingHeader.tsx.
 
 export function SiteFooter() {
   const n = t.landing.nav;

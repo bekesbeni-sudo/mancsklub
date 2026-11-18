@@ -1,20 +1,17 @@
 "use client";
-/* eslint-disable @next/next/no-img-element -- the logos are small fixed images */
-// Glass header and video hero of the landing page, from the mancsklub-frontpage package (2026-11-17).
-// Styles are the .lh-* rules in landing.css. Other pages keep SiteHeader from chrome.tsx.
+// Video hero of the landing page, from the mancsklub-frontpage package (2026-11-17).
+// Styles are the .lh-* rules in landing.css. The header is LandingHeader.tsx.
 import { useEffect, useRef, useState } from "react";
-import { site } from "@/config/site";
 import { t } from "@/messages";
+import { LandingHeader } from "./LandingHeader";
 
 const PHONE = "(max-width:760px)";
 const DESKTOP_VIDEO = "/landing/hero/hero-dog.mp4";
 const PHONE_VIDEO = "/landing/hero/hero-phone.mp4";
 
 export function LandingHero() {
-  const n = t.landing.nav;
   const h = t.landing.page.hero;
   const [dark, setDark] = useState(true);
-  const [menu, setMenu] = useState(false);
   // Phones get their own upright video. Chosen after load, so each device downloads only its own file.
   const [src, setSrc] = useState<string | null>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -59,36 +56,9 @@ export function LandingHero() {
     };
   }, [src]);
 
-  const close = () => setMenu(false);
-  const links = (
-    <>
-      <a href="#mi-ez" onClick={close}>{n.what}</a>
-      <a href="#hogyan" onClick={close}>{n.how}</a>
-      <a href="#arazas" onClick={close}>{n.price}</a>
-      <a href="#rolunk" onClick={close}>{n.about}</a>
-      <a href="#gyik" onClick={close}>{n.faq}</a>
-      <a href="/partnereknek">{t.footer.partners}</a>
-    </>
-  );
-
   return (
     <>
-      <header className={`lh-gh${dark ? " lh-dark" : ""}${menu ? " lh-open" : ""}`}>
-        <nav className="lh-bar" aria-label={n.label}>
-          <a href="#top" className="lh-logo-link" aria-label={n.home}>
-            <img src={site.logo} alt={site.name} className="lh-logo lh-logo-c" />
-            <img src={site.logoWhite} alt="" aria-hidden="true" className="lh-logo lh-logo-w" />
-          </a>
-          <div className="lh-links">{links}</div>
-          <div className="lh-right">
-            <a href="#feliratkozas" className="lh-glass-btn lh-btn-sm" onClick={close}>{t.landing.cta}</a>
-            <button type="button" className="lh-burger" aria-expanded={menu} aria-controls="lh-menu" aria-label={menu ? n.menuClose : n.menuOpen} onClick={() => setMenu((open) => !open)}>
-              <span /><span /><span />
-            </button>
-          </div>
-        </nav>
-        <div id="lh-menu" className="lh-menu" hidden={!menu}>{links}</div>
-      </header>
+      <LandingHeader dark={dark} />
       <section id="top" className="lh-hero">
         <div className="lh-stage" ref={stage}>
           <div className="lh-still" aria-hidden="true" />
